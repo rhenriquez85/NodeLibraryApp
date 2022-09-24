@@ -1,7 +1,10 @@
 const http = require('http');
 
 console.log('Enter request:')
-process.stdin.on('data', (data) => {
+const stdin = process.stdin;
+
+// EVENT HANDLER
+stdin.on('data', (data) => {
     const input = data.toString().trim();
 
     closeProgram(input);
@@ -25,8 +28,9 @@ function sendHTTPRequest(input) {
 }
 
 function closeProgram(input) {
-    if (['x', 'exit'].includes(input)) 
+    if (['x', 'exit'].includes(input))
         process.exit();
+        // stdin.destroy();     // do nothing; destroys process
 }
 
 
