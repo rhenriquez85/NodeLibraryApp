@@ -32,7 +32,7 @@ server.on('request', (req, res) => {
     console.log('>...REQUEST TO SERVER\n');
 
     closeServer(req, res);
-    home(req, res);
+    siteNav(req, res);
 })
 
 // CALLBACKS
@@ -44,10 +44,11 @@ function closeServer(req, res) {
     }
 }
 
-function home(req, res) {
+function siteNav(req, res) {
     const url = req.url;
-    if (url === '/home') {
-    fs.readFile(CONSTANTS.PATHS.HOME, (err, data) => {
+    if (Object.values(CONSTANTS.PAGES).includes(url)) {
+        const page = Object.entries(CONSTANTS.PAGES).find(([key, value]) => value === url)[0];
+        fs.readFile(CONSTANTS.PATHS[page], (err, data) => {
             if (err) console.log(err);
             res.write(data.toString());
             res.end();
