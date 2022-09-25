@@ -32,8 +32,8 @@ server.on('request', (req, res) => {
     console.log('>...REQUEST TO SERVER\n');
 
     closeServer(req, res);
-    siteNav(req, res);
     publicFolder(req, res);
+    siteNav(req, res);
 })
 
 // CALLBACKS
@@ -47,10 +47,7 @@ function closeServer(req, res) {
 
 function publicFolder(req, res) {
     const url = req.url;
-    console.log(url);
-    console.log(CONSTANTS.RESOURCES.STYLES);
     if (url === CONSTANTS.RESOURCES.STYLES) {
-        console.log(1111111111)
         const stream = fs.createReadStream(CONSTANTS.PATHS.STYLES, "UTF-8");
         res.writeHead(200, {"Content-Type": "text/css"});
         stream.pipe(res);
