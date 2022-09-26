@@ -8,11 +8,23 @@ const PATHS = {
     ABOUT: './pages/about.html',
     HOME: './pages/home.html',
     LIBRARY: './pages/library.html',
-    STYLES: './styles.css',
+    STYLES: './public/styles/styles.css',
 }
 
 const RESOURCES = {
     STYLES: '/styles.css',
 }
 
-module.exports = { PAGES, PATHS, RESOURCES };
+const ENTITIES = {
+    BOOK: 'book',
+}
+
+const PROPERTIES = {
+    BOOK: {
+        TITLE: 'title',
+        AUTHOR: 'author',
+        GENRE: 'genre',
+    }
+}
+
+module.exports = { PAGES, PATHS, RESOURCES, ENTITIES, PROPERTIES };
