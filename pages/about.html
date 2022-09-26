@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="/styles.css">
         <meta charset="UTF-8">
         <meta name="description" content="Nodejs.project">
+        <script src="/login.js" defer></script>
     </head>
     <body>
         <header>
@@ -20,6 +21,16 @@
         </header>
         <main>
             <p>This is the about page.</p>
+            <div class="mySQL-login-container">
+                <p>MySQL login form:</p>
+                <form action="/mySQL-login">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <label for="password">Password:</label>
+                    <input type="text" id="username" name="username">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </main>
     </body>
 </html>

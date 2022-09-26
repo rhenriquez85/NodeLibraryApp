@@ -14,6 +14,7 @@ const PATHS = {
     LOAD_LIBRARY: './public/scripts/load-library.js',
     IMAGE_BOOK: './public/images/book.jpeg',
     HELPERS: './public/scripts/helpers.js',
+    LOGIN: './public/scripts/login.js',
 }
 
 const IMAGES = {
@@ -27,11 +28,13 @@ const RESOURCES = {
     LOCAL_STORAGE_DELETE: '/delete-from-local-storage.js',
     LOAD_LIBRARY: '/load-library.js',
     HELPERS: '/helpers.js',
+    LOGIN: '/login.js',
 }
 
 const ROUTES = {
     ADD_TO_LIBRARY: '/add-to-library',
     DELETE_FROM_LIBRARY: '/delete-from-library',
+    MYSQL_LOGIN: '/mySQL-login',
 }
 
 const ENTITIES = {

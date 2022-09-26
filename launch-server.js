@@ -34,8 +34,7 @@ server.on('request', (req, res) => {
     closeServer(req, res);
     publicFolder(req, res);
     siteNav(req, res);
-    addToLibrary(req, res);
-    deleteFromLibrary(req, res);
+    registerRoutes(req, res);
 })
 
 // CALLBACKS
@@ -74,6 +73,11 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.LOGIN) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.LOGIN);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        stream.pipe(res);
+    }
     if (url === CONSTANTS.RESOURCES.IMAGE_BOOK) {
         const stream = fs.createReadStream(CONSTANTS.PATHS.IMAGE_BOOK);
         res.writeHead(200, { "Content-Type": "image/jpeg" });
@@ -93,6 +97,13 @@ function siteNav(req, res) {
     }
 }
 
+function registerRoutes(req, res) {
+    addToLibrary(req, res);
+    deleteFromLibrary(req, res);
+    mySQL_Login(req, res);
+}
+
+// CALLBACKS: LIBRARY
 function addToLibrary(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.ADD_TO_LIBRARY) {
@@ -119,6 +130,18 @@ function deleteFromLibrary(req, res) {
     }
 }
 
+// CALLBACKS: LOGIN
+function mySQL_Login(req, res) {
+    const url = convertURL(req, res);
+    if (url.pathname === CONSTANTS.ROUTES.MYSQL_LOGIN) {
+        res.writeHead(302, {
+            'Location': CONSTANTS.PAGES.ABOUT,
+        });
+        res.end();
+    }
+}
+
+// CALLBACKS: REQUEST LISTENER
 function requestListener(req, res) {
     const url = convertURL(req, res).pathname;
     if (Object.values(CONSTANTS.PAGES).includes(url) || 

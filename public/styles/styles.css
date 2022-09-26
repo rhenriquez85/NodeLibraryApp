@@ -79,3 +79,30 @@ header > nav > table tr td {
     height: 70px;
     padding-bottom: 10px;
 }
+
+/* ABOUT */
+.mySQL-login-container {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    text-align: center;
+    background-color: rgb(249, 228, 192);
+}
+
+.mySQL-login-container > p {
+    margin-bottom: 0px;
+}
+
+.mySQL-login-container form {
+    padding: 20px;
+}
+
+.mySQL-login-container form input:nth-child(2) {
+    margin-right: 20px;
+}
+
+.mySQL-login-container form button {
+    display: block;
+    width: 50%;
+    margin: 10px auto 0px;
+}
