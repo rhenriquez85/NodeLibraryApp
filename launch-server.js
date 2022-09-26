@@ -58,6 +58,11 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.LOAD_LIBRARY) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.LOAD_LIBRARY);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        stream.pipe(res);
+    }
 }
 
 function siteNav(req, res) {
@@ -74,7 +79,7 @@ function siteNav(req, res) {
 
 function addToLibrary(req, res) {
     const url = convertURL(req, res);
-    if (url.pathname === '/add-to-library') {
+    if (url.pathname === CONSTANTS.ROUTES.ADD_TO_LIBRARY) {
         // for (const [item, val] of url.searchParams.entries()) {
         //     // window.localStorage.setItem(item, val);
         // }
