@@ -34,7 +34,7 @@ server.on('request', (req, res) => {
     closeServer(req, res);
     publicFolder(req, res);
     siteNav(req, res);
-    // addToLibrary(req, res);
+    addToLibrary(req, res);
 })
 
 // CALLBACKS
@@ -72,19 +72,24 @@ function siteNav(req, res) {
     }
 }
 
-// function addToLibrary(req, res) {
-//     const url = convertURL(req, res);
-//     if (url.pathname === '/add-to-library') {
-//         for (const [item, val] of url.searchParams.entries()) {
-//             // window.localStorage.setItem(item, val);
-//         }
-//     }
-// }
+function addToLibrary(req, res) {
+    const url = convertURL(req, res);
+    if (url.pathname === '/add-to-library') {
+        // for (const [item, val] of url.searchParams.entries()) {
+        //     // window.localStorage.setItem(item, val);
+        // }
+        res.writeHead(302, {
+            'Location': CONSTANTS.PAGES.HOME,
+        });
+        res.end();
+    }
+}
 
 function requestListener(req, res) {
-    const url = req.url
+    const url = convertURL(req, res).pathname;
     if (Object.values(CONSTANTS.PAGES).includes(url) || 
-        Object.values(CONSTANTS.RESOURCES).includes(url)) 
+        Object.values(CONSTANTS.RESOURCES).includes(url) ||
+        Object.values(CONSTANTS.ROUTES).includes(url)) 
         return;
 
     res.write('Request\n');
