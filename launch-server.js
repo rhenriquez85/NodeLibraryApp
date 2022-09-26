@@ -35,6 +35,7 @@ server.on('request', (req, res) => {
     publicFolder(req, res);
     siteNav(req, res);
     addToLibrary(req, res);
+    deleteFromLibrary(req, res);
 })
 
 // CALLBACKS
@@ -53,8 +54,18 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/css" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.HELPERS) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.HELPERS);
+        res.writeHead(200, { "Content-Type": "text/javascript"})
+        stream.pipe(res);
+    }
     if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE) {
         const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        stream.pipe(res);
+    }
+    if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE_DELETE) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE_DELETE);
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
@@ -85,6 +96,19 @@ function siteNav(req, res) {
 function addToLibrary(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.ADD_TO_LIBRARY) {
+        // for (const [item, val] of url.searchParams.entries()) {
+        //     // window.localStorage.setItem(item, val);
+        // }
+        res.writeHead(302, {
+            'Location': CONSTANTS.PAGES.HOME,
+        });
+        res.end();
+    }
+}
+
+function deleteFromLibrary(req, res) {
+    const url = convertURL(req, res);
+    if (url.pathname === CONSTANTS.ROUTES.DELETE_FROM_LIBRARY) {
         // for (const [item, val] of url.searchParams.entries()) {
         //     // window.localStorage.setItem(item, val);
         // }
