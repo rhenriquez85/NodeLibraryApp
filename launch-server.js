@@ -34,6 +34,7 @@ server.on('request', (req, res) => {
     closeServer(req, res);
     publicFolder(req, res);
     siteNav(req, res);
+    // addToLibrary(req, res);
 })
 
 // CALLBACKS
@@ -49,7 +50,12 @@ function publicFolder(req, res) {
     const url = req.url;
     if (url === CONSTANTS.RESOURCES.STYLES) {
         const stream = fs.createReadStream(CONSTANTS.PATHS.STYLES, "UTF-8");
-        res.writeHead(200, {"Content-Type": "text/css"});
+        res.writeHead(200, { "Content-Type": "text/css" });
+        stream.pipe(res);
+    }
+    if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
 }
@@ -66,6 +72,15 @@ function siteNav(req, res) {
     }
 }
 
+// function addToLibrary(req, res) {
+//     const url = convertURL(req, res);
+//     if (url.pathname === '/add-to-library') {
+//         for (const [item, val] of url.searchParams.entries()) {
+//             // window.localStorage.setItem(item, val);
+//         }
+//     }
+// }
+
 function requestListener(req, res) {
     const url = req.url
     if (Object.values(CONSTANTS.PAGES).includes(url) || 
@@ -75,4 +90,9 @@ function requestListener(req, res) {
     res.write('Request\n');
     res.write(`url: ${url}`);
     res.end();
+}
+
+// HELPERS
+function convertURL(req, res) {
+    return new URL('http://' + req.headers.host + req.url);
 }
