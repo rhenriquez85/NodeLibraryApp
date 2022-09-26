@@ -1,0 +1,27 @@
+* {
+    width: 500px;
+    margin: auto;
+}
+
+main > p {
+    color: red;
+}
+
+header {
+    margin: 5px 0px;
+}
+
+.add-to-library {
+    position: absolute;
+    margin-top: 30px;
+    width: 200px;
+    line-height: 20px;
+}
+
+.add-to-library input, button {
+    width: 200px;
+}
+
+.add-to-library button {
+    margin-top: 5px;
+}
