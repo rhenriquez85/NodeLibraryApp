@@ -63,6 +63,11 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.IMAGE_BOOK) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.IMAGE_BOOK);
+        res.writeHead(200, { "Content-Type": "image/jpeg" });
+        stream.pipe(res);
+    }
 }
 
 function siteNav(req, res) {

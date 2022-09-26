@@ -11,9 +11,15 @@ const PATHS = {
     LOCAL_STORAGE: './public/storage/local-storage/add-to-local-storage.js',
     STYLES: './public/styles/styles.css',
     LOAD_LIBRARY: './public/scripts/load-library.js',
+    IMAGE_BOOK: './public/images/book.jpeg',
+}
+
+const IMAGES = {
+    IMAGE_BOOK: '/book.jpeg',
 }
 
 const RESOURCES = {
+    ...IMAGES,
     STYLES: '/styles.css',
     LOCAL_STORAGE: '/add-to-local-storage.js',
     LOAD_LIBRARY: '/load-library.js',
