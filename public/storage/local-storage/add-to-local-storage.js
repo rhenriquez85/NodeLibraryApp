@@ -7,7 +7,7 @@ addForm.addEventListener('submit', (event) => {
     ['title', 'author', 'genre'].forEach((name) => {
         const property = addForm.elements[name];
         data[name] = property.value;
-        // property.value = '';
+        property.value = '';
     });
 
     const title = data['title'];
@@ -34,8 +34,7 @@ addForm.addEventListener('submit', (event) => {
             xhr.send();
 
             xhr.addEventListener('load', () => {
-                console.log('loaded');
-
+                updateIndexedDB();
             });
         }
         else if (database === 'mongoDB') {
@@ -43,33 +42,8 @@ addForm.addEventListener('submit', (event) => {
         }
     }
     else {
-        // const data = {};
-        // ['title', 'author', 'genre'].forEach((name) => {
-        //     const property = addForm.elements[name];
-        //     data[name] = property.value;
-        //     property.value = '';
-        // });
-        // title = data['title'];
         window.localStorage.setItem(title, JSON.stringify(data));
     }
-
-    // const html = `<p class="book-added"><em>${title}</em> was added to the library!</p>`
-    // addForm.nextSibling?.remove();
-    // deleteForm.nextSibling?.remove();
-    // addForm.insertAdjacentHTML('afterend', html);
-
-    // const data = {};
-    // ['title', 'author', 'genre'].forEach((name) => {
-    //     const property = addForm.elements[name];
-    //     data[name] = property.value;
-    //     property.value = '';
-    // });
-    // window.localStorage.setItem(data['title'], JSON.stringify(data));
-
-    // const html = `<p class="book-added"><em>${data['title']}</em> was added to the library!</p>`
-    // addForm.nextSibling?.remove();
-    // deleteForm.nextSibling?.remove();
-    // addForm.insertAdjacentHTML('afterend', html);
 });
 
 

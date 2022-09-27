@@ -147,10 +147,6 @@ function addToLibrary(req, res) {
         else if (database === 'mongoDB') {
 
         }
-        // res.writeHead(201, {
-        //     'Content-Type': 'text/plain',
-        // });
-        // res.end();
     }
 }
 
