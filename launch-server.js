@@ -1,6 +1,8 @@
 const http = require('http');
 const fs = require('fs');
+const mysql = require('mysql');
 const CONSTANTS = require('./util/constants');
+const { resourceLimits } = require('worker_threads');
 
 const server = http.createServer(requestListener);
 server.listen(3000, () => {
@@ -134,10 +136,49 @@ function deleteFromLibrary(req, res) {
 function mySQL_Login(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.MYSQL_LOGIN) {
-        res.writeHead(302, {
-            'Location': CONSTANTS.PAGES.ABOUT,
+        const con = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'password',
+            database: 'sys',
         });
-        res.end();
+
+        con.connect((err) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            const query = 'select * from Users';
+            con.query(query, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+
+                let response = {};
+                result.forEach((data, index, arr) => {
+                    if (data.Username === url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)) {
+                        if (data.Password === url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD)) {
+                            return response[CONSTANTS.PROPERTIES.USER.USERNAME] = data.Username;
+                        }
+                        else {
+                            return response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.WRONG_PASSWORD;
+                        }
+                    }
+                });
+
+                if (Object.keys(response).length === 0) {
+                    response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.CREATE_NEW_USER;
+                }
+
+                res.writeHead(302, {
+                    'Content-Type': "text/plain",
+                });
+                res.write(JSON.stringify(response));
+                res.end();
+            });
+        });
     }
 }
 

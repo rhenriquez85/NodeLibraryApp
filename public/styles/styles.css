@@ -9,6 +9,7 @@ body {
 
 main > p {
     color: red;
+    display: inline-block;
 }
 
 /* HEADER */
@@ -28,7 +29,7 @@ header > nav > table tr td {
 /* ADD TO LIBRARY, DELETE FROM LIBRARY */
 .add-to-library, .delete-from-library {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 200px;
     line-height: 20px;
     margin-right: 100px;
@@ -90,6 +91,7 @@ header > nav > table tr td {
 }
 
 .mySQL-login-container > p {
+    display: inline-block;
     margin-bottom: 0px;
 }
 
@@ -104,5 +106,12 @@ header > nav > table tr td {
 .mySQL-login-container form button {
     display: block;
     width: 50%;
+    max-width: 300px;
     margin: 10px auto 0px;
+}
+
+.login-name {
+    position: relative;
+    float: right;
+    color: blue;
 }

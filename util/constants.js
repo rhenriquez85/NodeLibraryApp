@@ -39,6 +39,8 @@ const ROUTES = {
 
 const ENTITIES = {
     BOOK: 'book',
+    USER: 'user',
+    ERROR: 'error',
 }
 
 const PROPERTIES = {
@@ -46,7 +48,18 @@ const PROPERTIES = {
         TITLE: 'title',
         AUTHOR: 'author',
         GENRE: 'genre',
+    },
+    USER: {
+        USERNAME: 'username',
+        PASSWORD: 'password',
     }
 }
 
-module.exports = { PAGES, PATHS, RESOURCES, ROUTES, ENTITIES, PROPERTIES };
+const ERRORS = {
+    USER: {
+        WRONG_PASSWORD: 'wrong_password',
+        CREATE_NEW_USER: 'create_new_user',
+    }
+}
+
+module.exports = { PAGES, PATHS, RESOURCES, ROUTES, ENTITIES, PROPERTIES, ERRORS };
