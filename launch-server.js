@@ -142,78 +142,43 @@ function deleteFromLibrary(req, res) {
 function mySQL_Login(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.MYSQL_LOGIN) {
-        const con = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'password',
-            database: 'sys',
-        });
+        const query = 'select * from Users';
+        const callback = (result) => {
+            let response = {};
+            result.forEach((data, index, arr) => {
+                if (data.Username === url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)) {
+                    if (data.Password === url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD)) {
+                        return response[CONSTANTS.PROPERTIES.USER.USERNAME] = data.Username;
+                    }
+                    else {
+                        return response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.WRONG_PASSWORD;
+                    }
+                }
+            });
 
-        con.connect((err) => {
-            if (err) {
-                console.log(err);
-                return;
+            if (Object.keys(response).length === 0) {
+                response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.CREATE_NEW_USER;
             }
 
-            const query = 'select * from Users';
-            con.query(query, (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
+            res.writeHead(200, { 'Content-Type': "text/plain" });
+            res.write(JSON.stringify(response));
+            res.end();
+        }
 
-                let response = {};
-                result.forEach((data, index, arr) => {
-                    if (data.Username === url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)) {
-                        if (data.Password === url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD)) {
-                            return response[CONSTANTS.PROPERTIES.USER.USERNAME] = data.Username;
-                        }
-                        else {
-                            return response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.WRONG_PASSWORD;
-                        }
-                    }
-                });
-
-                if (Object.keys(response).length === 0) {
-                    response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.CREATE_NEW_USER;
-                }
-
-                res.writeHead(302, { 'Content-Type': "text/plain" });
-                res.write(JSON.stringify(response));
-                res.end();
-            });
-        });
+        connectToMySQL(query, callback);
     }
 }
 
 function mySQL_LoadLibrary(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.MYSQL_LOAD_LIBRARY) {
-        const con = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'password',
-            database: 'sys',
-        });
-
-        con.connect((err) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-
-            const query = `select * from Books where User = "${url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)}"`;
-            con.query(query, (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-
+        const query = `select * from Books where User = "${url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)}"`;
+        callback = (result) => {
                 res.writeHead(200, { "Content-Type": "text/plain"});
                 res.write(JSON.stringify(result));
                 res.end();
-            });
-        });
+        };
+        connectToMySQL(query, callback);
     }
 }
 
@@ -233,4 +198,29 @@ function requestListener(req, res) {
 // HELPERS
 function convertURL(req, res) {
     return new URL('http://' + req.headers.host + req.url);
+}
+
+function connectToMySQL(query, callback) {
+    const con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'password',
+        database: 'sys',
+    });
+
+    con.connect((err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        con.query(query, (err, result) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            callback(result);
+        });
+    });
 }
