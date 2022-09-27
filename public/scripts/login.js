@@ -12,6 +12,7 @@ mySQLLoginForm.addEventListener('submit', (event) => {
 
         if (response.username) {
             session.setItem('active_account', response.username);
+            session.setItem('database', 'mySQL');
             mySQLLoginForm.reset();
             showActiveAccount();
         }
