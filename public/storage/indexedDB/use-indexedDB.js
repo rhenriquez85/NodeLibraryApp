@@ -17,7 +17,6 @@ function callback() {
     loadIndexedDB();
 
     function loadIndexedDB() {
-        console.log(1111);
         const xhr = new XMLHttpRequest();
         const parameters = { username: session.getItem('active_account')};
         const url = convertToURL('/mySQL-load-library', parameters);
@@ -32,7 +31,6 @@ function callback() {
             };
 
             openRequest.onsuccess = () => {
-                console.log(4444);
                 const db = openRequest.result;
                 let transaction = db.transaction('books', 'readwrite');
                 let books = transaction.objectStore('books');

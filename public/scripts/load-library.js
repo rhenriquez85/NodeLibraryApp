@@ -4,9 +4,23 @@ const session = window.sessionStorage;
 
 if (session.getItem('database') === 'mySQL') {
     console.log('mySQL');
+
+    const openRequest = indexedDB.open('store', 1);
+    openRequest.onsuccess = () => {
+
+        const db = openRequest.result;
+        const transaction = db.transaction('books', 'readwrite');
+        const objectStoreRequest = transaction.objectStore('books').getAll();
+
+        objectStoreRequest.onsuccess = () => {
+            const books = objectStoreRequest.result;
+            loadLibrary(books);
+            db.close();
+        };
+    };
 }
 else if (session.getItem('database') === 'mongoDB') {
-    console.log('mongoDB')
+    console.log('mongoDB');
 }
 else {
     const books = convertLocalStorageToObj();
