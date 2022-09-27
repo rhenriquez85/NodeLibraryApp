@@ -115,13 +115,42 @@ function registerRoutes(req, res) {
 function addToLibrary(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.ADD_TO_LIBRARY) {
-        // for (const [item, val] of url.searchParams.entries()) {
-        //     // window.localStorage.setItem(item, val);
-        // }
-        res.writeHead(302, {
-            'Location': CONSTANTS.PAGES.HOME,
-        });
-        res.end();
+        const database = url.searchParams.get(CONSTANTS.PROPERTIES.USER.DATABASE);
+        const user = url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME);
+        const title = url.searchParams.get(CONSTANTS.PROPERTIES.BOOK.TITLE);
+        const author = url.searchParams.get(CONSTANTS.PROPERTIES.BOOK.AUTHOR);
+        const genre = url.searchParams.get(CONSTANTS.PROPERTIES.BOOK.GENRE);
+
+        if (database === 'mySQL') {
+            const query = `select count(Title) from Books where Title = "${title}" and User = "${user}"`;
+            const callback = (result) => {
+
+                let query2;
+                if (result[0]['count(Title)']) {
+                    query2 = `update Books set Author = "${author}", Genre = "${genre}" where Title = "${title}" and User = "${user}"`;
+                }
+                else {
+                    query2 = `insert into Books values ("${title}", "${author}", "${genre}", "${user}")`;
+                }
+                const callback2 = (result) => {
+                    console.log(result);
+                    res.writeHead(201, {
+                        'Content-Type': 'text/plain',
+                    });
+                    res.end();
+                };
+                connectToMySQL(query2, callback2);
+            };
+
+            connectToMySQL(query, callback);
+        }
+        else if (database === 'mongoDB') {
+
+        }
+        // res.writeHead(201, {
+        //     'Content-Type': 'text/plain',
+        // });
+        // res.end();
     }
 }
 

@@ -51,10 +51,12 @@ const PROPERTIES = {
         TITLE: 'title',
         AUTHOR: 'author',
         GENRE: 'genre',
+        USER: 'user',
     },
     USER: {
         USERNAME: 'username',
         PASSWORD: 'password',
+        DATABASE: 'database',
     }
 }
 
