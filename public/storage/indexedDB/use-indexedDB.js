@@ -11,9 +11,6 @@ observer.observe(document.querySelector('.login-name'), {
 function callback() {
     if (session.getItem('database') !== 'mySQL') return;
 
-    indexedDB.deleteDatabase('store');
-    console.log(11111);
-
     const xhr = new XMLHttpRequest();
     const parameters = { username: session.getItem('active_account')};
     const url = convertToURL('/mySQL-load-library', parameters);
@@ -21,14 +18,12 @@ function callback() {
     xhr.send();
 
     xhr.addEventListener('load', () => {
-        let openRequest = indexedDB.open('store', 1);
+        let openRequest = indexedDB.open('store', Date.now());
 
         openRequest.onerror = (err) => {
             console.log(err);
         };
 
-        console.log(222222);
-        
         openRequest.onsuccess = () => {
             const db = openRequest.result;
             let transaction = db.transaction('books', 'readwrite');
@@ -43,16 +38,18 @@ function callback() {
                     genre: item.Genre,
                 }
                 books.add(book);
-            }); 
+            });
+            db.close();
         };
         
         openRequest.onupgradeneeded = () => {
             let db = openRequest.result;
-            if (!db.objectStoreNames.contains('books')) {
-                db.createObjectStore('books', {
-                    keyPath: 'title',
-                });
+            if (db.objectStoreNames.contains('books')) {
+                db.deleteObjectStore('books');
             }
+            db.createObjectStore('books', {
+                keyPath: 'title',
+            });
         };
     });
 }
