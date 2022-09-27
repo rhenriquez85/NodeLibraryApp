@@ -70,6 +70,11 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.INDEXED_DB) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.INDEXED_DB);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        stream.pipe(res);
+    }
     if (url === CONSTANTS.RESOURCES.LOAD_LIBRARY) {
         const stream = fs.createReadStream(CONSTANTS.PATHS.LOAD_LIBRARY);
         res.writeHead(200, { "Content-Type": "text/javascript" });
@@ -103,6 +108,7 @@ function registerRoutes(req, res) {
     addToLibrary(req, res);
     deleteFromLibrary(req, res);
     mySQL_Login(req, res);
+    mySQL_LoadLibrary(req, res);
 }
 
 // CALLBACKS: LIBRARY
@@ -172,10 +178,39 @@ function mySQL_Login(req, res) {
                     response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.CREATE_NEW_USER;
                 }
 
-                res.writeHead(302, {
-                    'Content-Type': "text/plain",
-                });
+                res.writeHead(302, { 'Content-Type': "text/plain" });
                 res.write(JSON.stringify(response));
+                res.end();
+            });
+        });
+    }
+}
+
+function mySQL_LoadLibrary(req, res) {
+    const url = convertURL(req, res);
+    if (url.pathname === CONSTANTS.ROUTES.MYSQL_LOAD_LIBRARY) {
+        const con = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'password',
+            database: 'sys',
+        });
+
+        con.connect((err) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            const query = `select * from Books where User = "${url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)}"`;
+            con.query(query, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+
+                res.writeHead(200, { "Content-Type": "text/plain"});
+                res.write(JSON.stringify(result));
                 res.end();
             });
         });
