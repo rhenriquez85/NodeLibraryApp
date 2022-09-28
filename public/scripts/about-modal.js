@@ -18,6 +18,7 @@ modalLink.addEventListener('click', (event) => {
 document.addEventListener('click', (event) => {
     if (!event.target.closest(".mySQL-login-container")) {
         activateModal(false);
+        document.querySelector('.mySQL-login-container form').reset();
     }
 });
 
