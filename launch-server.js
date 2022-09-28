@@ -134,6 +134,7 @@ function addToLibrary(req, res) {
                 }
                 const callback2 = (result) => {
                     console.log(result);
+
                     res.writeHead(201, {
                         'Content-Type': 'text/plain',
                     });
@@ -153,13 +154,27 @@ function addToLibrary(req, res) {
 function deleteFromLibrary(req, res) {
     const url = convertURL(req, res);
     if (url.pathname === CONSTANTS.ROUTES.DELETE_FROM_LIBRARY) {
-        // for (const [item, val] of url.searchParams.entries()) {
-        //     // window.localStorage.setItem(item, val);
-        // }
-        res.writeHead(302, {
-            'Location': CONSTANTS.PAGES.HOME,
-        });
-        res.end();
+        const database = url.searchParams.get(CONSTANTS.PROPERTIES.USER.DATABASE);
+        const user = url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME);
+        const title = url.searchParams.get(CONSTANTS.PROPERTIES.BOOK.TITLE);
+
+        if (database === 'mySQL') {
+            const query = `delete from Books where User = "${user}" and Title = "${title}"`;
+            console.log(query);
+            const callback = (result) => {
+                console.log(result);
+
+                res.writeHead(201, {
+                    "Content-Type": "text/plain",
+                })
+                res.write(JSON.stringify(result));
+                res.end()
+            };
+            connectToMySQL(query, callback);
+        }
+        else if (database === 'mongoDB') {
+
+        }
     }
 }
 
