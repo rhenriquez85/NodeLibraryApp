@@ -114,6 +114,7 @@ function registerRoutes(req, res) {
     deleteFromLibrary(req, res);
     mySQL_Login(req, res);
     mySQL_LoadLibrary(req, res);
+    mySQL_AddUser(req, res);
 }
 
 // CALLBACKS: LIBRARY
@@ -190,9 +191,12 @@ function mySQL_Login(req, res) {
         const query = 'select * from Users';
         const callback = (result) => {
             let response = {};
+            const username = url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME);
+            const password = url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD);
+
             result.forEach((data, index, arr) => {
-                if (data.Username === url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME)) {
-                    if (data.Password === url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD)) {
+                if (data.Username === username) {
+                    if (data.Password === password) {
                         return response[CONSTANTS.PROPERTIES.USER.USERNAME] = data.Username;
                     }
                     else {
@@ -203,6 +207,8 @@ function mySQL_Login(req, res) {
 
             if (Object.keys(response).length === 0) {
                 response[CONSTANTS.ENTITIES.ERROR] = CONSTANTS.ERRORS.USER.CREATE_NEW_USER;
+                response[CONSTANTS.PROPERTIES.USER.USERNAME] = username;
+                response[CONSTANTS.PROPERTIES.USER.PASSWORD] = password;
             }
 
             res.writeHead(200, { 'Content-Type': "text/plain" });
@@ -223,6 +229,25 @@ function mySQL_LoadLibrary(req, res) {
                 res.write(JSON.stringify(result));
                 res.end();
         };
+        connectToMySQL(query, callback);
+    }
+}
+
+function mySQL_AddUser(req, res) {
+    const url = convertURL(req, res);
+    if (url.pathname === CONSTANTS.ROUTES.MYSQL_ADD_USER) {
+        const username = url.searchParams.get(CONSTANTS.PROPERTIES.USER.USERNAME);
+        const password = url.searchParams.get(CONSTANTS.PROPERTIES.USER.PASSWORD);
+        const query = `insert into Users values("${username}", "${password}")`;
+        callback = (result) => {
+            const response = {
+                result,
+                username,
+            }
+            res.writeHead(201, { "Content-Type": "text/plain" });
+            res.write(JSON.stringify(response));
+            res.end();
+        }
         connectToMySQL(query, callback);
     }
 }

@@ -40,6 +40,7 @@ const ROUTES = {
     DELETE_FROM_LIBRARY: '/delete-from-library',
     MYSQL_LOGIN: '/mySQL-login',
     MYSQL_LOAD_LIBRARY: '/mySQL-load-library',
+    MYSQL_ADD_USER: '/mySQL-add-user',
 }
 
 const ENTITIES = {

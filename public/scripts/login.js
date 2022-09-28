@@ -10,7 +10,7 @@ mySQLLoginForm.addEventListener('submit', (event) => {
     xhr.addEventListener('load', () => {
         const response = JSON.parse(xhr.responseText);
 
-        if (response.username) {
+        if (!response.error) {
             session.setItem('active_account', response.username);
             session.setItem('database', 'mySQL');
             mySQLLoginForm.reset();
@@ -26,7 +26,14 @@ mySQLLoginForm.addEventListener('submit', (event) => {
             else if (err === 'create_new_user') {
                 const answer = window.confirm('Do you want to create a new account?');
                 if (answer) {
-
+                    const { username, password } = response;
+                    parameters = {
+                        username,
+                        password,
+                    };
+                    const url2 = convertToURL('/mySQL-add-user', parameters);
+                    xhr.open('PUT', url2);
+                    xhr.send();
                 }
             }
         }
