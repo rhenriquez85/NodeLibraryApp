@@ -5,6 +5,7 @@
 body {
     width: 60%;
     margin: auto;
+    
 }
 
 main > p {
@@ -82,7 +83,50 @@ header > nav > table tr td {
 }
 
 /* ABOUT */
+.blur-active {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
+
+.about-container {
+    height: 600px;
+    /* height: 100%; */
+    /* margin-bottom: 100px; */
+    /* margin-bottom: 100px; */
+}
+
+.about-message {
+    position: absolute;
+    background-color: rgb(226, 226, 226);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 60%;
+}
+
+.about-message p {
+    padding-left: 20px;
+}
+
+.about-message a {
+    color: blue;
+}
+
+.about-message a:hover {
+    color: darkorange;
+}
+
+.mySQL-modal {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .mySQL-login-container {
+    display: none;
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 600px;
     border-style: solid;
     border-color: black;
     border-width: 2px;
