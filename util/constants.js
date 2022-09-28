@@ -16,6 +16,7 @@ const PATHS = {
     IMAGE_BOOK: './public/images/book.jpeg',
     HELPERS: './public/scripts/helpers.js',
     LOGIN: './public/scripts/login.js',
+    ABOUT_MODAL: './public/scripts/about-modal.js',
 }
 
 const IMAGES = {
@@ -31,6 +32,7 @@ const RESOURCES = {
     LOAD_LIBRARY: '/load-library.js',
     HELPERS: '/helpers.js',
     LOGIN: '/login.js',
+    ABOUT_MODAL: '/about-modal.js',
 }
 
 const ROUTES = {

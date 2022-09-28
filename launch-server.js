@@ -90,6 +90,11 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "image/jpeg" });
         stream.pipe(res);
     }
+    if (url === CONSTANTS.RESOURCES.ABOUT_MODAL) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.ABOUT_MODAL);
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        stream.pipe(res);
+    }
 }
 
 function siteNav(req, res) {
