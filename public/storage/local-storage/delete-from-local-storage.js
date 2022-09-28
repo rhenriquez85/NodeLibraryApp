@@ -22,18 +22,15 @@ deleteForm.addEventListener('submit', (event) => {
             xhr.send();
 
             xhr.addEventListener('load', () => {
-                console.log('sent');
-
-                console.log(xhr.responseText);
                 const data = JSON.parse(xhr.responseText);
-                console.log(data);
-                console.log(data['affectedRows']);
 
                 let name;
                 if (data['affectedRows']) {
                     name = title;
                 }
+
                 displayMessage(name);
+                updateIndexedDB();
             });
         }
         else if (database === 'mongoDB') {
@@ -46,7 +43,7 @@ deleteForm.addEventListener('submit', (event) => {
         Object.entries(books).forEach(([name, val], index, arr) => {
             if (name === title) {
                 window.localStorage.removeItem(name);
-                mathchedName = name;
+                matchedName = name;
                 return;
             }
             displayMessage(matchedName);

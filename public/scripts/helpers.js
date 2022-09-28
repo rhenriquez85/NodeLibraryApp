@@ -19,7 +19,7 @@ function convertToURL(path, parameters = {}) {
     return url;
 }
 
-function updateIndexedDB() {
+function updateIndexedDB(callback) {
     if (window.sessionStorage.getItem('database') !== 'mySQL') return;
 
     const deleteRequest = indexedDB.deleteDatabase('store');
@@ -28,6 +28,7 @@ function updateIndexedDB() {
     loadIndexedDB();
 
     function loadIndexedDB() {
+
         const xhr = new XMLHttpRequest();
         const parameters = { username: window.sessionStorage.getItem('active_account')};
         const url = convertToURL('/mySQL-load-library', parameters);
@@ -56,7 +57,13 @@ function updateIndexedDB() {
                     }
                     books.add(book);
                 });
-                db.close();
+
+                if (callback) {
+                    callback(db);
+                }
+                else {
+                    db.close();
+                }
             };
             
             openRequest.onupgradeneeded = () => {

@@ -3,12 +3,7 @@ const child = document.createElement('div');
 const session = window.sessionStorage;
 
 if (session.getItem('database') === 'mySQL') {
-    console.log('mySQL');
-
-    const openRequest = indexedDB.open('store', 1);
-    openRequest.onsuccess = () => {
-
-        const db = openRequest.result;
+    updateIndexedDB((db) => {
         const transaction = db.transaction('books', 'readwrite');
         const objectStoreRequest = transaction.objectStore('books').getAll();
 
@@ -17,7 +12,7 @@ if (session.getItem('database') === 'mySQL') {
             loadLibrary(books);
             db.close();
         };
-    };
+    });
 }
 else if (session.getItem('database') === 'mongoDB') {
     console.log('mongoDB');
@@ -29,6 +24,8 @@ else {
 
 // HELPERS
 function loadLibrary(books) {
+    document.querySelector('.library-container').innerHTML = '';
+
     Object.values(books).forEach((obj, index, arr) => {
         let property = '';
         Object.entries(obj).forEach(([name, value], index, arr) => {
