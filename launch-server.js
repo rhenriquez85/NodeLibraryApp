@@ -2,7 +2,6 @@ const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
 const CONSTANTS = require('./util/constants');
-const { resourceLimits } = require('worker_threads');
 
 const server = http.createServer(requestListener);
 server.listen(3000, () => {
