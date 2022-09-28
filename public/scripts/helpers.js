@@ -58,7 +58,7 @@ function updateIndexedDB(callback) {
                     books.add(book);
                 });
 
-                if (callback) {
+                if (typeof callback === 'function') {
                     callback(db);
                 }
                 else {

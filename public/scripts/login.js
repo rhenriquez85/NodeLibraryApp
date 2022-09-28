@@ -15,9 +15,20 @@ mySQLLoginForm.addEventListener('submit', (event) => {
             session.setItem('database', 'mySQL');
             mySQLLoginForm.reset();
             showActiveAccount();
+            window.alert('You logged into your account!');
+            activateModal(false);
         }
         else {
-            console.log('error: ' + response.error);
+            const err = response.error;
+            if (err === 'wrong_password') {
+                window.alert('You entered a wrong password.');
+            }
+            else if (err === 'create_new_user') {
+                const answer = window.confirm('Do you want to create a new account?');
+                if (answer) {
+
+                }
+            }
         }
     });
 

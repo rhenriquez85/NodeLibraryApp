@@ -23,8 +23,6 @@ document.addEventListener('click', (event) => {
 
 // HELPER
 function activateModal(turnOn) {
-    console.log(123123);
-
     const modal = document.querySelector('.mySQL-login-container');
     modal.style.visibility = turnOn ? 'visible' : 'hidden';
 
