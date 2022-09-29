@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "start": "nodemon launch-server.js"
+  },
   "dependencies": {
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.4"
   }
 }

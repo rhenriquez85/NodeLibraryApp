@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "launch-server.js"]
+CMD ["npm", "start"]
