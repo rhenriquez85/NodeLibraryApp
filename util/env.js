@@ -3,7 +3,7 @@ const APP = {
 };
 
 const MYSQL = {
-    HOST: 'sql' || process.env.MYSQL_HOST || 'localhost',
+    HOST: process.env.MYSQL_HOST || 'localhost',
     USER: process.env.MYSQL_USER || 'root',
     PASSWORD: process.env.MYSQL_PASSWORD || 'password',
     DATABASE: process.env.MYSQL_DATABASE || 'sys',
