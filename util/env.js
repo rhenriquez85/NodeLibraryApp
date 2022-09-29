@@ -1,5 +1,5 @@
 const APP = {
-    PORT: process.env.NODE_PORT || 5000,
+    PORT: process.env.NODE_PORT || 3000,
 };
 
 const MYSQL = {
