@@ -4,11 +4,13 @@ docker build -t rhenriquez85/nodelibraryapp .
 docker network create net
 
 # (mysql container)
-docker run --name sql --network net -e MYSQL_ROOT_PASSWORD=password -d --rm mysql
+docker run --name sql --network net -v mysqldb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d --rm mysql
 
 docker exec -it sql bash
 
-mysql --user=root --password=password -e " alter user 'root' identified with mysql_native_password by 'password'; flush privileges; create table sys.Users (Username varchar(255), Password varchar(255)); alter table sys.Users add primary key (Username); create table sys.Books (Title varchar(255), Author varchar(255), Genre varchar(255), User varchar(255)); alter table sys.Books add primary key (Title, User);"
+mysql --user=root --password=password -e "alter user 'root' identified with mysql_native_password by 'password'; flush privileges;" -e "create table sys.Users (Username varchar(255), Password varchar(255)); alter table sys.Users add primary key (Username);" -e "create table sys.Books (Title varchar(255), Author varchar(255), Genre varchar(255), User varchar(255)); alter table sys.Books add primary key (Title, User);"
+
+exit
 
 # (app container)
 docker run -p 3000:3000 --rm --name tmp --network net -v /Users/ajrosado/Documents/dev/node-proj1:/app -v /app/node_modules rhenriquez85/nodelibraryapp
@@ -19,13 +21,14 @@ docker run -p 3000:3000 --rm --name tmp --network net -v /Users/ajrosado/Documen
 
 
 
-##### SQL COMMANDS
+
+##### SQL QUERIES
 
 #alter privileges to allow connect to server
-mysql --user=root --password=password -e "alter user 'root' identified with mysql_native_password by 'password'; flush privileges; "
+-e "alter user 'root' identified with mysql_native_password by 'password'; flush privileges;"
 
 #create Users table
-mysql --user=root --password=password -e "create table sys.Users (Username varchar(255), Password varchar(255)); alter table sys.Users add primary key (Username);"
+-e "create table sys.Users (Username varchar(255), Password varchar(255)); alter table sys.Users add primary key (Username);"
 
 #create Books table
-mysql --user=root --password=password -e "create table sys.Books (Title varchar(255), Author varchar(255), Genre varchar(255), User varchar(255)); alter table sys.Books add primary key (Title, User);"
+-e "create table sys.Books (Title varchar(255), Author varchar(255), Genre varchar(255), User varchar(255)); alter table sys.Books add primary key (Title, User);"
