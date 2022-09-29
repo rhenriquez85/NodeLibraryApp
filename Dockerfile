@@ -8,6 +8,12 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+ENV NODE_PORT 3000
+ENV MYSQL_HOST "localhost"
+ENV MYSQL_USER "root"
+ENV MYSQL_PASSWORD "password"
+ENV MYSQL_DATABASE "sys"
+
+EXPOSE $NODE_PORT
 
 CMD ["npm", "start"]

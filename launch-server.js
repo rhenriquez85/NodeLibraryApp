@@ -2,9 +2,10 @@ const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
 const CONSTANTS = require('./util/constants');
+const ENV = require('./util/env');
 
 const server = http.createServer(requestListener);
-server.listen(3000, () => {
+server.listen(ENV.APP.PORT, () => {
     console.log('LISTENING...\n');
 });
 
@@ -271,10 +272,10 @@ function convertURL(req, res) {
 
 function connectToMySQL(query, callback) {
     const con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'sys',
+        host: ENV.MYSQL.HOST,
+        user: ENV.MYSQL.USER,
+        password: ENV.MYSQL.PASSWORD,
+        database: ENV.MYSQL.DATABASE,
     });
 
     con.connect((err) => {
