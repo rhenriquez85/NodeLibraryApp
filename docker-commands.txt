@@ -13,7 +13,7 @@ mysql --user=root --password=password -e "alter user 'root' identified with mysq
 exit
 
 # (app container)
-docker run -p 3000:3000 --rm --name tmp --network net rhenriquez85/nodelibraryapp
+docker run -p 80:80 --rm --name tmp --network net rhenriquez85/nodelibraryapp
 
 
 
