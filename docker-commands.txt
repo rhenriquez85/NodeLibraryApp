@@ -1,6 +1,4 @@
 ##### TERMINAL
-docker build -t rhenriquez85/nodelibraryapp .
-
 docker network create net
 
 # (mysql container)
