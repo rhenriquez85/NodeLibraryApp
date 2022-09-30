@@ -1,0 +1,2 @@
+##### TERMINAL
+docker-compose up -d && docker attach node-proj1_nodelibraryapp_1

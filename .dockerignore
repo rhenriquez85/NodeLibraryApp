@@ -1,4 +1,7 @@
 node_modules
 Dockerfile
+docker-compose.yaml
+docker-commands.txt
+docker-compose-commands.txt
 .git
 .gitignore
