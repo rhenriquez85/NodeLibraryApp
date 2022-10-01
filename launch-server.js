@@ -267,7 +267,7 @@ function requestListener(req, res) {
 
 // HELPERS
 function convertURL(req, res) {
-    return new URL('https://' + req.headers.host + req.url);
+    return new URL('http://' + req.headers.host + req.url);
 }
 
 function connectToMySQL(query, callback) {
