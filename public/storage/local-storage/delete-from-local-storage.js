@@ -35,17 +35,17 @@ deleteForm.addEventListener('submit', (event) => {
         }
     }
     else {
-        const books = convertLocalStorageToObj();
+        const ids = getLocalStorageIDs();
+        const local = window.localStorage;
         let matchedName;
-        Object.entries(books).forEach(([name, val], index, arr) => {
+        Object.entries(ids).forEach(([name, id]) => {
             if (name === title) {
-                window.localStorage.removeItem(name);
+                local.removeItem(name);
+                local.removeItem(id);
                 matchedName = name;
-                return;
             }
-            displayMessage(matchedName);
         });
-
+        displayMessage(matchedName);
     }
 
 });

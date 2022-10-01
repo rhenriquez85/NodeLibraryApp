@@ -1,9 +1,20 @@
 function convertLocalStorageToObj() {
     const obj = {};
     const entries = Object.entries(window.localStorage);
-    entries.forEach(([name, book]) => {
-        if (isNaN(+name)) return;
-        obj[name] = JSON.parse(book);
+    entries.forEach(([id, book]) => {
+        const data = JSON.parse(book);
+        if (!data.title) return;
+        obj[id] = data;
+    });
+    return obj;
+}
+
+function getLocalStorageIDs() {
+    const obj = {};
+    const entries = Object.entries(window.localStorage);
+    entries.forEach(([title, id]) => {
+        if (!isNaN(+id) && title.substring(0, 2) !== '__')
+            obj[title] = id;
     });
     return obj;
 }
@@ -18,17 +29,6 @@ function convertToURL(path, parameters = {}) {
         url = url.substring(1, url.length - 1);
     }
     return url;
-}
-
-function sizeOfLibrary() {
-    return window.localStorage.length === 0 ? 
-        0 :
-        (window.localStorage.length - Object.keys(window.localStorage).reduce((prev, cur) => {
-            if (cur.substring(0, 2) === '__')
-                return prev + 1;
-            else
-                return prev;
-        }, 0)) / 2;
 }
 
 function updateIndexedDB(callback) {
