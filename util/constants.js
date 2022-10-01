@@ -1,10 +1,12 @@
 const PAGES = {
+    ROOT: '/',
     ABOUT: '/about',
     HOME: '/home',
     LIBRARY: '/library',
 }
 
 const PATHS = {
+    ROOT: './pages/home.html',
     ABOUT: './pages/about.html',
     HOME: './pages/home.html',
     LIBRARY: './pages/library.html',

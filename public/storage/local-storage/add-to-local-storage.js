@@ -37,12 +37,13 @@ addForm.addEventListener('submit', (event) => {
                 updateIndexedDB();
             });
         }
-        else if (database === 'mongoDB') {
-            console.log('mongoDB');
-        }
     }
     else {
-        window.localStorage.setItem(title, JSON.stringify(data));
+        const local = window.localStorage;
+        const id = +local.getItem('__highest') + 1;
+        local.setItem('__highest', id);
+        local.setItem(id, JSON.stringify(data));
+        local.setItem(data['title'], id);
     }
 });
 

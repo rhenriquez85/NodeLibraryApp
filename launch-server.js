@@ -151,9 +151,6 @@ function addToLibrary(req, res) {
 
             connectToMySQL(query, callback);
         }
-        else if (database === 'mongoDB') {
-
-        }
     }
 }
 
@@ -177,9 +174,6 @@ function deleteFromLibrary(req, res) {
                 res.end()
             };
             connectToMySQL(query, callback);
-        }
-        else if (database === 'mongoDB') {
-
         }
     }
 }

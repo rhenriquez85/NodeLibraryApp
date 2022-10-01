@@ -33,9 +33,6 @@ deleteForm.addEventListener('submit', (event) => {
                 updateIndexedDB();
             });
         }
-        else if (database === 'mongoDB') {
-            console.log('mongoDB');
-        }
     }
     else {
         const books = convertLocalStorageToObj();

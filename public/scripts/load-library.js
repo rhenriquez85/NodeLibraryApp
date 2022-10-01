@@ -1,6 +1,24 @@
 //
 const child = document.createElement('div');
 const session = window.sessionStorage;
+const local = window.localStorage;
+
+if (!local.getItem('__visited')) {
+    let id = local.getItem('__highest');
+    [
+        ['__visited', 'true'],
+        ['A Hunger Artist', ++id],
+        [id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
+        ['As I Lay Dying', ++id],
+        [id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
+        ['White Buildings', ++id],
+        [id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
+        ['__highest', id],
+    ].
+    forEach(([key, value]) => {
+        local.setItem(key, value);
+    });
+}
 
 if (session.getItem('database') === 'mySQL') {
     updateIndexedDB((db) => {
@@ -13,9 +31,6 @@ if (session.getItem('database') === 'mySQL') {
             db.close();
         };
     });
-}
-else if (session.getItem('database') === 'mongoDB') {
-    console.log('mongoDB');
 }
 else {
     const books = convertLocalStorageToObj();
