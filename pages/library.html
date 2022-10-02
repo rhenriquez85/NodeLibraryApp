@@ -11,7 +11,12 @@
         <script src="/delete-from-local-storage.js" defer></script>
         <script>
             function clearLocalStorage() {
+                // const visited = window.localStorage.getItem('__visited') ? true : false;
                 window.localStorage.clear();
+                // if (visited)
+                //     window.localStorage.setItem('__visited', 'true');
+                window.location = window.location;
+                // console.log(window.localStorage.getItem('__visited'))
             }
         </script>
     </head>
@@ -23,13 +28,13 @@
                         <td><a href="/home">Home</a></td>
                         <td><a href="/library">Library</a></td>
                         <td><a href="/about">About</a></td>
-                        <td><button onclick="clearLocalStorage()">CLEAR</a></td>
                     </tr>
                 </table>
             </nav>
         </header>
         <main>
             <p>This is the library.</p>
+            <button style="float: right" onclick="clearLocalStorage()">CLEAR</button>
             <div class="library-container">
                 <!-- <div>
                     <img src="book.jpeg" alt="Image of book.">

@@ -33,21 +33,16 @@ server.on('close', () => {
 server.on('request', (req, res) => {
     console.log('>...REQUEST TO SERVER\n');
 
-    closeServer(req, res);
     publicFolder(req, res);
     siteNav(req, res);
     registerRoutes(req, res);
 })
 
-// CALLBACKS
-function closeServer(req, res) {
-    const url = req.url;
-    if (url === '/exit') {
-        console.log('...Request to shutdown server\n');
-        server.close();
-    }
-}
+server.on('error', (err) => {
+    console.log(err);
+});
 
+// CALLBACKS
 function publicFolder(req, res) {
     const url = req.url;
     if (url === CONSTANTS.RESOURCES.STYLES) {

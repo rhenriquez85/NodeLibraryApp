@@ -61,8 +61,8 @@ addForm.addEventListener('submit', (event) => {
     }
 
     setTimeout(() => {
-        window.location.reload();
-    }, 1500);
+        window.location = window.location;
+    }, 1200);
 });
 
 function displayAddMessage(name) {

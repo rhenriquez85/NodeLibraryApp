@@ -85,4 +85,28 @@ function loadLibrary(books) {
         </form>
     `;
     library.appendChild(child);
+
+    const childNodes = library.childNodes
+    for (let i = 0; i < childNodes.length - 1; i++) {
+        const node = childNodes[i];
+
+        const deleteMsg = document.createElement('p');
+        deleteMsg.className = 'close-button-deleted';
+        deleteMsg.innerText = 'Deleted!';
+        node.prepend(deleteMsg);
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-button';
+        closeButton.innerText = 'x';
+        node.prepend(closeButton);
+
+        closeButton.addEventListener('click', () => {
+            deleteMsg.style.display = 'inline';
+            setTimeout(() => {
+                deleteMsg.style.display = 'initial';
+                
+                window.location = window.location
+            }, 1200);
+        });
+    }
 }
