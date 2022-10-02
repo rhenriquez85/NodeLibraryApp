@@ -9,16 +9,6 @@ function convertLocalStorageToObj() {
     return obj;
 }
 
-function getLocalStorageIDs() {
-    const obj = {};
-    const entries = Object.entries(window.localStorage);
-    entries.forEach(([title, id]) => {
-        if (!isNaN(+id) && title.substring(0, 2) !== '__')
-            obj[title] = id;
-    });
-    return obj;
-}
-
 function convertToURL(path, parameters = {}) {
     let url = path;
     if (parameters != {}) {

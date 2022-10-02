@@ -7,12 +7,9 @@ if (!local.getItem('__visited')) {
     let id = local.getItem('__highest');
     [
         ['__visited', 'true'],
-        ['A Hunger Artist', ++id],
-        [id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
-        ['As I Lay Dying', ++id],
-        [id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
-        ['White Buildings', ++id],
-        [id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
+        [++id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
+        [++id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
+        [++id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
         ['__highest', id],
     ].
     forEach(([key, value]) => {
@@ -51,7 +48,6 @@ function loadLibrary(books) {
         const child = document.createElement('div');
         child.innerHTML = '<img src="book.jpeg" alt="Image of book.">';
         child.innerHTML += property;
-        // document.querySelector('.library-container').appendChild(child);
         library.appendChild(child);
     });
 

@@ -1,8 +1,10 @@
 //
-const deleteForm = document.querySelector('.delete-from-library');
+const deleteForm = document.querySelector('.library-add-delete');
 
 deleteForm.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    if (event.submitter.innerText === 'Add') return;
 
     const session = window.sessionStorage;
     const username = session.getItem('active_account');
@@ -29,29 +31,29 @@ deleteForm.addEventListener('submit', (event) => {
                     name = title;
                 }
 
-                displayMessage(name);
+                displayDeleteMessage(name);
                 updateIndexedDB();
             });
         }
     }
     else {
-        const ids = getLocalStorageIDs();
+        const ids = convertLocalStorageToObj();
+
         const local = window.localStorage;
         let matchedName;
-        Object.entries(ids).forEach(([name, id]) => {
-            if (name === title) {
-                local.removeItem(name);
+        Object.entries(ids).forEach(([id, book]) => {
+            if (book.title === title) {
                 local.removeItem(id);
-                matchedName = name;
+                matchedName = book.title;
             }
         });
-        displayMessage(matchedName);
+        displayDeleteMessage(matchedName);
     }
 
 });
 
 // HELPERS
-function displayMessage(name) {
+function displayDeleteMessage(name) {
     let html;
     if (name) {
         html = `<p class="book-deleted"><em>${name}</em> was removed from the library!.</p>`;
