@@ -7,6 +7,11 @@
         <meta name="description" content="Nodejs.project">
         <script src="/helpers.js" defer></script>
         <script src="/load-library.js" defer></script>
+        <script>
+            function clearLocalStorage() {
+                window.localStorage.clear();
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -16,6 +21,7 @@
                         <td><a href="/home">Home</a></td>
                         <td><a href="/library">Library</a></td>
                         <td><a href="/about">About</a></td>
+                        <td><button onclick="clearLocalStorage()">CLEAR</a></td>
                     </tr>
                 </table>
             </nav>
@@ -28,10 +34,7 @@
                     <br>Title: Book1
                     <br>Author: Author1
                     <br>Genre: Fiction
-                </div>
-                <div></div>
-                <div></div>
-                <div></div> -->
+                </div> -->
             </div>
         </main>
     </body>

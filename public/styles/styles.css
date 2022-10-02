@@ -5,7 +5,6 @@
 body {
     width: 60%;
     margin: auto;
-    
 }
 
 main > p {
@@ -68,9 +67,11 @@ header > nav > table tr td {
     font-size: 16px;
     margin-bottom: 100px;
     padding: 2px;
+
+
 }
 
-.library-container div {
+.library-container > div {
     background-color: rgb(0, 136, 255);
     padding: 10px;
     height: 150px;
@@ -82,6 +83,41 @@ header > nav > table tr td {
     padding-bottom: 10px;
 }
 
+.library-container > div:last-child {
+    background-color: rgb(223, 223, 223);
+}
+
+.library-container div {
+}
+
+.library-add-delete {
+    background-color: rgb(223, 223, 223);
+}
+
+.library-add-delete label {
+    width: 100%;
+}
+
+.library-add-delete input {
+    width: 300%;
+}
+
+.library-add-delete div {
+    display: flex;
+}
+
+.library-add-delete div:last-child {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.library-add-delete div button {
+    margin: 5px;
+    width: 40%;
+}
+
 /* ABOUT */
 .blur-active {
     filter: blur(1px);
@@ -90,9 +126,6 @@ header > nav > table tr td {
 
 .about-container {
     height: 600px;
-    /* height: 100%; */
-    /* margin-bottom: 100px; */
-    /* margin-bottom: 100px; */
 }
 
 .about-message {
@@ -158,4 +191,66 @@ header > nav > table tr td {
     position: relative;
     float: right;
     color: blue;
+}
+
+/* MOBILE */
+@media (pointer:none), (pointer:coarse), (max-width: 768px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    main > p {
+        display: inline-block;
+        height: 10vw;
+        margin: 0;
+        padding: 0 2vw;
+        font-size: 6vw;
+    }
+
+    /* HEADER */
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 15vw;
+        vertical-align: middle;
+    }
+
+    header > nav > table tr td {
+        font-size: 6vw;
+    }
+
+
+    /* HEADER */
+    /* header {
+        margin: 5px 0px;
+    }
+
+    header > nav > table {
+        width: auto;
+        margin: auto;
+    }
+
+    header > nav > table tr td {
+        padding: 5px 30px;
+    } */
+
+    /* LIBRARY */
+    .library-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        font-size: 4.5vw;
+
+    }
+    
+    .library-container div {
+        height: 25vh;
+        padding: 2vw;
+    }
+
+    .library-container img {
+        height: 10vh;
+        padding-bottom: 0vh;
+    }
 }

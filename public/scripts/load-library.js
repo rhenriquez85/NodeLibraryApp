@@ -39,7 +39,8 @@ else {
 
 // HELPERS
 function loadLibrary(books) {
-    document.querySelector('.library-container').innerHTML = '';
+    const library = document.querySelector('.library-container')
+    library.innerHTML = '';
 
     Object.values(books).forEach((obj, index, arr) => {
         let property = '';
@@ -50,6 +51,30 @@ function loadLibrary(books) {
         const child = document.createElement('div');
         child.innerHTML = '<img src="book.jpeg" alt="Image of book.">';
         child.innerHTML += property;
-        document.querySelector('.library-container').appendChild(child);
+        // document.querySelector('.library-container').appendChild(child);
+        library.appendChild(child);
     });
+
+    const child = document.createElement('div');
+    child.innerHTML = `
+        <form class="library-add-delete">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div>
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">   
+            </div>
+            <div>
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre">
+            </div>
+            <div>
+                <button type="submit">Add</button>
+                <button type="submit">Delete</button>
+            </div>
+        </form>
+    `;
+    library.appendChild(child);
 }
