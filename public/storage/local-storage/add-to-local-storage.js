@@ -5,8 +5,16 @@ addForm.addEventListener('submit', (event) => {
 
     if (event.submitter.innerText === 'Delete') return;
 
+    const bookDetails = ['title', 'author', 'genre'];
+    for (const detail of bookDetails) {
+        if (addForm.elements[detail].value === '') {
+            window.alert(`Please enter a ${detail}.`);
+            return;
+        }
+    }
+
     const data = {};
-    ['title', 'author', 'genre'].forEach((name) => {
+    bookDetails.forEach((name) => {
         const property = addForm.elements[name];
         data[name] = property.value;
         property.value = '';

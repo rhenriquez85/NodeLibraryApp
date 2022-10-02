@@ -64,7 +64,19 @@ function loadLibrary(books) {
             </div>
             <div>
                 <label for="genre">Genre:</label>
-                <input type="text" id="genre" name="genre">
+                <select type="text" id="genre" name="genre">
+                    <option value=""></option>
+                    <option value="Ficton">Fiction</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="History">History</option>
+                    <option value="Science">Science</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Business">Business</option>
+                    <option value="Economics">Economics</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div>
                 <button type="submit">Add</button>
@@ -74,3 +86,22 @@ function loadLibrary(books) {
     `;
     library.appendChild(child);
 }
+
+{/* <form class="library-add-delete">
+<div>
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+</div>
+<div>
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author">   
+</div>
+<div>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre">
+</div>
+<div>
+    <button type="submit">Add</button>
+    <button type="submit">Delete</button>
+</div>
+</form> */}

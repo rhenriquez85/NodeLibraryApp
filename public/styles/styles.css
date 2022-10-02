@@ -67,8 +67,6 @@ header > nav > table tr td {
     font-size: 16px;
     margin-bottom: 100px;
     padding: 2px;
-
-
 }
 
 .library-container > div {
@@ -91,8 +89,13 @@ header > nav > table tr td {
     width: 100%;
 }
 
-.library-add-delete input {
+.library-add-delete input, select {
     width: 300%;
+}
+
+.library-add-delete select {
+    background-color: white;
+    width: 305%;
 }
 
 .library-add-delete div {
@@ -252,16 +255,16 @@ header > nav > table tr td {
         width: 50%;
     }
     
-    .library-add-delete input {
+    .library-add-delete input, select {
         width: 100%;
         font-size: 3vw;
     }
 
-    
-
-    /* .library-add-delete div {
-        display: flex;
-    } */
+    .library-add-delete select {
+        width: 107%;
+        border-color: grey;
+        border-radius: .6vw;
+    }
 
     .library-add-delete div:last-child {
         display: inline-flex;
@@ -281,16 +284,4 @@ header > nav > table tr td {
         border-radius: 1vw;
         background-color: rgb(234, 230, 230);
     }
-    
-    /* .library-add-delete div:last-child {
-        display: inline-flex;
-        width: 100%;
-        justify-content: space-around;
-        align-items: center;
-    }
-    
-    .library-add-delete div button {
-        margin: 5px;
-        width: 40%;
-    } */
 }
