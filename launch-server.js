@@ -39,6 +39,10 @@ server.on('request', (req, res) => {
     registerRoutes(req, res);
 })
 
+server.on('error', (err) => {
+    console.log(err);
+});
+
 // CALLBACKS
 function closeServer(req, res) {
     const url = req.url;
