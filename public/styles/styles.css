@@ -50,6 +50,7 @@ header > nav > table tr td {
 .book-added, .book-deleted {
     position: relative;
     color: rgb(230, 151, 3);
+    margin: auto;
 }
 
 .book-added em {
@@ -95,7 +96,7 @@ header > nav > table tr td {
 
 .library-add-delete select {
     background-color: white;
-    width: 305%;
+    width: 307%;
 }
 
 .library-add-delete div {
@@ -110,7 +111,7 @@ header > nav > table tr td {
 }
 
 .library-add-delete div button {
-    margin: 5px;
+    margin: 15px;
     width: 40%;
 }
 
@@ -283,5 +284,9 @@ header > nav > table tr td {
         border-color: black;
         border-radius: 1vw;
         background-color: rgb(234, 230, 230);
+    }
+
+    .book-added, .book-deleted {
+        margin: 2.5vh 0; 
     }
 }

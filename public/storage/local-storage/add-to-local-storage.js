@@ -59,6 +59,10 @@ addForm.addEventListener('submit', (event) => {
         local.setItem('__highest', id);
         local.setItem(id, JSON.stringify(data));
     }
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500);
 });
 
 function displayAddMessage(name) {

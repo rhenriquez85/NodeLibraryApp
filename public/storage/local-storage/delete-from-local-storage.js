@@ -48,8 +48,12 @@ deleteForm.addEventListener('submit', (event) => {
             }
         });
         displayDeleteMessage(matchedName);
+        if (!matchedName) return;
     }
 
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500);
 });
 
 // HELPERS
