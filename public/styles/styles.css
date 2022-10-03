@@ -99,8 +99,6 @@ header > nav > table tr td {
     display: none;
     font-weight: 900;
     float: right;
-    top: 200px;
-    right: 200px;
     font-style: italic;
     transform: translateX(-30px);
     transform: translateY(20px);
@@ -253,11 +251,27 @@ header > nav > table tr td {
     .library-container > div {
         height: 25vh;
         padding: 2vw;
+        position: relative;
     }
 
     .library-container img {
         height: 10vh;
         padding-bottom: 0vh;
+    }
+
+    .close-button {
+        width: 6vw;
+        height: 6.5vw;
+        font-size: 4vw;
+    }
+
+    .close-button-deleted {
+        position: absolute;
+        float: right;
+        top: 10vw;
+        right: 2vw;
+        font-size: 3.8vw;
+        margin: 0px;
     }
 
     /* LIBRARY ADD/DELETE */
