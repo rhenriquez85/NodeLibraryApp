@@ -27,7 +27,7 @@ header > nav > table tr td {
 }
 
 /* ADD TO LIBRARY, DELETE FROM LIBRARY */
-.add-to-library, .delete-from-library {
+/* .add-to-library, .delete-from-library {
     display: inline-block;
     margin-top: 10px;
     width: 200px;
@@ -41,7 +41,7 @@ header > nav > table tr td {
 
 .add-to-library button, .delete-from-library button {
     margin-top: 5px;
-}
+} */
 
 .book-forms {
     display: inline-grid;
@@ -85,6 +85,7 @@ header > nav > table tr td {
     padding-bottom: 10px;
 }
 
+/* CLOSE BUTTON */
 .close-button {
     background-color: black;
     color: white;
@@ -102,6 +103,14 @@ header > nav > table tr td {
     font-style: italic;
     transform: translateX(-30px);
     transform: translateY(20px);
+}
+
+/* RESET LIBRARY */
+.reset-library {
+    display: initial;
+    float: right;
+    transform: translateY(12px);
+    width: 200px;
 }
 
 /* LIBRARY ADD/DELETE */
@@ -168,6 +177,7 @@ header > nav > table tr td {
     color: darkorange;
 }
 
+/* mySQL */
 .mySQL-modal-link {
     text-decoration: underline;
     cursor: pointer;
@@ -259,6 +269,7 @@ header > nav > table tr td {
         padding-bottom: 0vh;
     }
 
+    /* CLOSE BUTTON */
     .close-button {
         width: 6vw;
         height: 6.5vw;
@@ -272,6 +283,15 @@ header > nav > table tr td {
         right: 2vw;
         font-size: 3.8vw;
         margin: 0px;
+    }
+
+    /* RESET LIBRARY */
+    .reset-library {
+        transform: translateY(-0.5vh);
+        font-size: 3.5vw;
+        margin-right: 2vw;
+        border-color: black;
+        border-radius: 1vw;
     }
 
     /* LIBRARY ADD/DELETE */

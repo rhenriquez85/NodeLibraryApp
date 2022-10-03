@@ -1,9 +1,9 @@
 ##########################################
-############# PRODUCTION
+############## PRODUCTION
 
 docker network create net
 
-# (mysql container)
+### (mysql container)
 docker run --name sql --network net -v mysqldb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d --rm mysql
 
 docker exec -it sql bash
@@ -12,7 +12,7 @@ mysql --user=root --password=password -e "alter user 'root' identified with mysq
 
 exit
 
-# (app container)
+### (app container)
 docker run -p 80:80 -e NODE_PORT=80 --rm --name tmp --network net rhenriquez85/nodelibraryapp
 
 
@@ -20,11 +20,11 @@ docker run -p 80:80 -e NODE_PORT=80 --rm --name tmp --network net rhenriquez85/n
 
 
 ##########################################
-############## DEVELOPMENT
+############### DEVELOPMENT
 
 docker network create net
 
-# (mysql container)
+### (mysql container)
 docker run --name sql --network net -v mysqldb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d --rm mysql
 
 docker exec -it sql bash
@@ -33,20 +33,20 @@ mysql --user=root --password=password -e "alter user 'root' identified with mysq
 
 exit
 
-# (app container)
+### (app container)
 docker run -p 3000:3000 --rm --name tmp --network net -v /Users/ajrosado/Documents/dev/node-proj1:/app -v /app/node_modules rhenriquez85/nodelibraryapp
 
 
 
 
 
-##### SQL QUERIES
+############### SQL QUERIES
 
-#alter privileges to allow connect to server
+### alter privileges to allow connect to server
 -e "alter user 'root' identified with mysql_native_password by 'password'; flush privileges;"
 
-#create Users table
+### create Users table
 -e "create table sys.Users (Username varchar(255), Password varchar(255)); alter table sys.Users add primary key (Username);"
 
-#create Books table
+### create Books table
 -e "create table sys.Books (Title varchar(255), Author varchar(255), Genre varchar(255), User varchar(255)); alter table sys.Books add primary key (Title, User);"

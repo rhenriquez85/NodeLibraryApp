@@ -21,6 +21,11 @@ function convertToURL(path, parameters = {}) {
     return url;
 }
 
+function resetLibrary() {
+    window.localStorage.clear();
+    window.location = window.location;
+}
+
 function updateIndexedDB(callback) {
     if (window.sessionStorage.getItem('database') !== 'mySQL') return;
 

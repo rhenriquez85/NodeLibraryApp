@@ -9,16 +9,6 @@
         <script src="/add-to-storage.js" defer></script>
         <script src="/delete-from-storage.js" defer></script>
         <script src="/load-library.js" defer></script>
-        <script>
-            function clearLocalStorage() {
-                // const visited = window.localStorage.getItem('__visited') ? true : false;
-                window.localStorage.clear();
-                // if (visited)
-                //     window.localStorage.setItem('__visited', 'true');
-                window.location = window.location;
-                // console.log(window.localStorage.getItem('__visited'))
-            }
-        </script>
     </head>
     <body>
         <header>
@@ -34,7 +24,7 @@
         </header>
         <main>
             <p>This is the library.</p>
-            <button style="float: right" onclick="clearLocalStorage()">CLEAR</button>
+            <button onclick="resetLibrary()" class="reset-library">Reset Library</button>
             <div class="library-container">
                 <div>
                     <form class="library-add-delete">

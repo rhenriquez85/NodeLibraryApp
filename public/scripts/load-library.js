@@ -2,19 +2,8 @@
 const session = window.sessionStorage;
 const local = window.localStorage;
 
-if (!local.getItem('__visited')) {
-    let id = local.getItem('__highest');
-    [
-        ['__visited', 'true'],
-        [++id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
-        [++id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
-        [++id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
-        ['__highest', id],
-    ].
-    forEach(([key, value]) => {
-        local.setItem(key, value);
-    });
-}
+initLibrary();
+showResetButton();
 
 if (session.getItem('database') === 'mySQL') {
     updateIndexedDB((db) => {
@@ -34,6 +23,29 @@ else {
 }
 
 // HELPERS
+function initLibrary() {
+    if (!local.getItem('__visited')) {
+        let id = local.getItem('__highest');
+        [
+            ['__visited', 'true'],
+            [++id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
+            [++id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
+            [++id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
+            ['__highest', id],
+        ].
+        forEach(([key, value]) => {
+            local.setItem(key, value);
+        });
+    }
+}
+
+function showResetButton() {
+    const resetBtn = document.querySelector('.reset-library');
+    resetBtn.style.display = session.getItem('active_account') ?
+        'none' :
+        'initial';
+}
+
 function loadLibrary(books) {
     const form = document.querySelector('.library-add-delete').parentElement;
     const library = document.querySelector('.library-container')

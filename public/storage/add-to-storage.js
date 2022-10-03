@@ -14,7 +14,8 @@ function addToLibrary() {
     const bookDetails = ['title', 'author', 'genre'];
     for (const detail of bookDetails) {
         if (addForm.elements[detail].value === '') {
-            window.alert(`Please enter a ${detail}.`);
+            const article = detail === 'author' ? 'an' : 'a';
+            window.alert(`Please enter ${article} ${detail}.`);
             return;
         }
     }
