@@ -45,7 +45,13 @@ function addToLibrary() {
             xhr.send();
 
             xhr.addEventListener('load', () => {
-                updateIndexedDB();
+                const data = JSON.parse(xhr.responseText);
+
+                let bookToAdd = data.matched ? null : title;
+                displayAddMessage(bookToAdd);
+                if (bookToAdd) {
+                    updateIndexedDB();
+                }
             });
         }
     }

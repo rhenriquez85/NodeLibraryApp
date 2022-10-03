@@ -128,20 +128,29 @@ function addToLibrary(req, res) {
 
                 let query2;
                 if (result[0]['count(Title)']) {
-                    query2 = `update Books set Author = "${author}", Genre = "${genre}" where Title = "${title}" and User = "${user}"`;
+                    console.log(result);
+
+                    res.writeHead(200, {
+                        'Content-Type': 'text/plain',
+                    });
+                    res.write('{"matched": "true"}');
+                    res.end();
                 }
                 else {
                     query2 = `insert into Books values ("${title}", "${author}", "${genre}", "${user}")`;
-                }
-                const callback2 = (result) => {
-                    console.log(result);
 
-                    res.writeHead(201, {
-                        'Content-Type': 'text/plain',
-                    });
-                    res.end();
-                };
-                connectToMySQL(query2, callback2);
+                    const callback2 = (result) => {
+                        console.log(result);
+    
+                        res.writeHead(201, {
+                            'Content-Type': 'text/plain',
+                        });
+                        res.write(JSON.stringify(result));
+                        res.end();
+                    };
+    
+                    connectToMySQL(query2, callback2);
+                }
             };
 
             connectToMySQL(query, callback);

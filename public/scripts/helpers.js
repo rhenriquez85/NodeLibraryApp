@@ -27,7 +27,7 @@ function updateIndexedDB(callback) {
     const deleteRequest = indexedDB.deleteDatabase('store');
 
     deleteRequest.onsuccess = loadIndexedDB;
-    loadIndexedDB();
+    // loadIndexedDB();
 
     function loadIndexedDB() {
 
