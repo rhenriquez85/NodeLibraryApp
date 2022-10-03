@@ -6,10 +6,6 @@ const PAGES = {
 }
 
 const PATHS = {
-    // ROOT: './pages/home.html',
-    // ABOUT: './pages/about.html',
-    // HOME: './pages/home.html',
-    // LIBRARY: './pages/library.html',
     ROOT: './public/pages/home.html',
     ABOUT: './public/pages/about.html',
     HOME: './public/pages/home.html',
