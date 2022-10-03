@@ -1,10 +1,16 @@
 //
 const addForm = document.querySelector(".library-add-delete");
+
 addForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     if (event.submitter.innerText === 'Delete') return;
 
+    addToLibrary();
+});
+
+// HELPERS
+function addToLibrary() {
     const bookDetails = ['title', 'author', 'genre'];
     for (const detail of bookDetails) {
         if (addForm.elements[detail].value === '') {
@@ -62,8 +68,8 @@ addForm.addEventListener('submit', (event) => {
 
     setTimeout(() => {
         window.location = window.location;
-    }, 1200);
-});
+    }, 1100);
+}
 
 function displayAddMessage(name) {
     let html;

@@ -1,5 +1,4 @@
 //
-const child = document.createElement('div');
 const session = window.sessionStorage;
 const local = window.localStorage;
 
@@ -36,13 +35,14 @@ else {
 
 // HELPERS
 function loadLibrary(books) {
+    const form = document.querySelector('.library-add-delete').parentElement;
     const library = document.querySelector('.library-container')
     library.innerHTML = '';
 
     Object.values(books).forEach((obj, index, arr) => {
         let property = '';
         Object.entries(obj).forEach(([name, value], index, arr) => {
-            property += `<br>${name.charAt(0).toUpperCase() + name.slice(1)}: ${value}`;
+            property += `<br><span title=${name}>${name.charAt(0).toUpperCase() + name.slice(1)}: ${value}</span>`;
         });
         
         const child = document.createElement('div');
@@ -51,44 +51,17 @@ function loadLibrary(books) {
         library.appendChild(child);
     });
 
-    const child = document.createElement('div');
-    child.innerHTML = `
-        <form class="library-add-delete">
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title">
-            </div>
-            <div>
-                <label for="author">Author:</label>
-                <input type="text" id="author" name="author">   
-            </div>
-            <div>
-                <label for="genre">Genre:</label>
-                <select type="text" id="genre" name="genre">
-                    <option value=""></option>
-                    <option value="Ficton">Fiction</option>
-                    <option value="Poetry">Poetry</option>
-                    <option value="History">History</option>
-                    <option value="Science">Science</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Business">Business</option>
-                    <option value="Economics">Economics</option>
-                    <option value="Politics">Politics</option>
-                    <option value="Philosophy">Philosophy</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div>
-                <button type="submit">Add</button>
-                <button type="submit">Delete</button>
-            </div>
-        </form>
-    `;
-    library.appendChild(child);
+    library.appendChild(form);
 
     const childNodes = library.childNodes
     for (let i = 0; i < childNodes.length - 1; i++) {
         const node = childNodes[i];
+
+        let title;
+        node.childNodes.forEach((node, index, arr) => {
+            if (node.title === 'title')
+                title = node.innerText.substring('Title: '.length);
+        });
 
         const deleteMsg = document.createElement('p');
         deleteMsg.className = 'close-button-deleted';
@@ -102,11 +75,7 @@ function loadLibrary(books) {
 
         closeButton.addEventListener('click', () => {
             deleteMsg.style.display = 'inline';
-            setTimeout(() => {
-                deleteMsg.style.display = 'initial';
-                
-                window.location = window.location
-            }, 1200);
+            deleteFromLibrary(title, false);
         });
     }
 }

@@ -6,10 +6,14 @@ deleteForm.addEventListener('submit', (event) => {
 
     if (event.submitter.innerText === 'Add') return;
 
+    deleteFromLibrary(deleteForm.elements['title'].value);
+});
+
+// HELPERS
+function deleteFromLibrary(title, display = true) {
     const session = window.sessionStorage;
     const username = session.getItem('active_account');
     const database = session.getItem('database');
-    const title = deleteForm.elements['title'].value;
 
     if (username) {
         if (database === 'mySQL') {
@@ -31,7 +35,7 @@ deleteForm.addEventListener('submit', (event) => {
                     name = title;
                 }
 
-                displayDeleteMessage(name);
+                display && displayDeleteMessage(name);
                 updateIndexedDB();
             });
         }
@@ -47,16 +51,15 @@ deleteForm.addEventListener('submit', (event) => {
                 matchedName = book.title;
             }
         });
-        displayDeleteMessage(matchedName);
+        display && displayDeleteMessage(matchedName);
         if (!matchedName) return;
     }
 
     setTimeout(() => {
         window.location = window.location;
-    }, 1200);
-});
+    }, 1100);
+}
 
-// HELPERS
 function displayDeleteMessage(name) {
     let html;
     if (name) {
