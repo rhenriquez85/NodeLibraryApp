@@ -21,6 +21,9 @@ server.on('connection', (socket) => {
     socket.on('close', () => {
         console.log('>.........CONNECTION TO SERVER CLOSED\n');
     });
+    socket.on('error', (err) => {
+        console.log(err);
+    })
 });
 
 server.on('close', () => {
