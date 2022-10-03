@@ -55,13 +55,17 @@ function publicFolder(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript"})
         stream.pipe(res);
     }
-    if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE) {
-        const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE);
+    // if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE) {
+    //     const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE);
+    if (url === CONSTANTS.RESOURCES.STORAGE_ADD) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.STORAGE_ADD);
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }
-    if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE_DELETE) {
-        const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE_DELETE);
+    // if (url === CONSTANTS.RESOURCES.LOCAL_STORAGE_DELETE) {
+    //     const stream = fs.createReadStream(CONSTANTS.PATHS.LOCAL_STORAGE_DELETE);
+    if (url === CONSTANTS.RESOURCES.STORAGE_DELETE) {
+        const stream = fs.createReadStream(CONSTANTS.PATHS.STORAGE_DELETE);
         res.writeHead(200, { "Content-Type": "text/javascript" });
         stream.pipe(res);
     }

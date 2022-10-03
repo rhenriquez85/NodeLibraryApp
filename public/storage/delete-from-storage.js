@@ -26,7 +26,7 @@ function deleteFromLibrary(title, display = true) {
             const url = convertToURL('/delete-from-library', parameters);
             xhr.open('POST', url);
             xhr.send();
-
+            
             xhr.addEventListener('load', () => {
                 const data = JSON.parse(xhr.responseText);
 
@@ -42,15 +42,16 @@ function deleteFromLibrary(title, display = true) {
     }
     else {
         const ids = convertLocalStorageToObj();
-
         const local = window.localStorage;
         let matchedName;
+
         Object.entries(ids).forEach(([id, book]) => {
             if (book.title === title) {
                 local.removeItem(id);
                 matchedName = book.title;
             }
         });
+
         display && displayDeleteMessage(matchedName);
         if (!matchedName) return;
     }

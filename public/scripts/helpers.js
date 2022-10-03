@@ -25,12 +25,9 @@ function updateIndexedDB(callback) {
     if (window.sessionStorage.getItem('database') !== 'mySQL') return;
 
     const deleteRequest = indexedDB.deleteDatabase('store');
-
     deleteRequest.onsuccess = loadIndexedDB;
-    // loadIndexedDB();
 
     function loadIndexedDB() {
-
         const xhr = new XMLHttpRequest();
         const parameters = { username: window.sessionStorage.getItem('active_account')};
         const url = convertToURL('/mySQL-load-library', parameters);
