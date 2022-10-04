@@ -54,6 +54,7 @@ header > nav > table tr td {
     grid-template-columns: 33.33% 33.33% 33.33%;
     font-size: 16px;
     margin-bottom: 100px;
+    /* margin-bottom: 150px; */
     padding: 2px;
 }
 
@@ -61,6 +62,7 @@ header > nav > table tr td {
     background-color: rgb(0, 136, 255);
     padding: 10px;
     height: 150px;
+    /* height: 200px; */
     outline: 3px solid black;
 }
 
@@ -137,11 +139,12 @@ header > nav > table tr td {
     -webkit-filter: blur(1px);
 }
 
-.home-container {
+.home-container, .about-container {
     height: 600px;
+    margin-bottom: 50px;
 }
 
-.home-message {
+.home-message, .about-message {
     position: absolute;
     background-color: rgb(226, 226, 226);
     padding-top: 10px;
@@ -149,16 +152,22 @@ header > nav > table tr td {
     width: 60%;
 }
 
-.home-message p {
+.home-message p, .about-message p {
     padding-left: 20px;
 }
 
-.home-message a {
+.home-message a, .about-message a {
     color: blue;
 }
 
-.home-message a:hover {
+.home-message a:hover, .about-message a:hover {
     color: darkorange;
+}
+
+.mobile-message {
+    padding-top: 20px;
+    color: red;
+    font-style: italic;
 }
 
 /* mySQL */
@@ -322,23 +331,27 @@ header > nav > table tr td {
         -webkit-filter: blur(2px);
     }
 
-    .home-container {
+    .home-container, .about-container {
         height: 65vh;
     }
 
-    .home-message {
+    .home-message, .about-message {
         padding-top: 0px;
         padding-bottom: 0px;
         width: 100vw;
         font-size: 3.2vw;
     }
 
-    .home-message a {
+    .home-message a, .about-message a {
         color: blue;
     }
 
-    .home-message a:hover {
+    .home-message a:hover, .about-message a:hover {
         color: darkorange;
+    }
+
+    .mobile-message {
+        display: none;
     }
 
     /* mySQL */
