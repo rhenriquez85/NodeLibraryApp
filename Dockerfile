@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json .
 
 RUN npm install
+RUN npm install pm2 -g
 
 COPY . .
 
@@ -16,4 +17,4 @@ ENV MYSQL_DATABASE="sys"
 
 EXPOSE $NODE_PORT
 
-CMD ["npm", "start"]
+CMD ["pm2-runtime", "launch-server.js"]
