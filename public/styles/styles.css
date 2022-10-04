@@ -90,7 +90,7 @@ header > nav > table tr td {
 }
 
 /* RESET LIBRARY */
-.reset-library, .add-random-book {
+.add-random-book, .reset-library {
     display: initial;
     float: right;
     transform: translateY(12px);
@@ -222,12 +222,12 @@ header > nav > table tr td {
         height: 100vh;
     }
 
-    main {
+    .library-main {
         display: inline-grid;
         grid-template-columns: 50vw 25vw 25vw;
     }
 
-    main > div.library-container {
+    .library-main > div.library-container {
         grid-column-start: 1;
         grid-column-end: 4;
     }
@@ -288,7 +288,7 @@ header > nav > table tr td {
     }
 
     /* RESET LIBRARY */
-    .reset-library, .add-random-book {
+    .add-random-book, .reset-library {
         transform: translateY(-1vh);
         font-size: 3.5vw;
         width: fit-content;
@@ -298,8 +298,17 @@ header > nav > table tr td {
         border-radius: 1vw;
     }
 
+    .add-random-book {
+        order: 2;
+    }
+
     .reset-library {
         margin-right: 2vw;
+        order: 3;
+    }
+
+    .library-container {
+        order: 4;
     }
 
     /* LIBRARY ADD/DELETE */
