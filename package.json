@@ -3,7 +3,8 @@
     "start": "nodemon launch-server.js"
   },
   "dependencies": {
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "2.0.4"
