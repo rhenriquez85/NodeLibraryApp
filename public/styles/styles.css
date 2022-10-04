@@ -26,23 +26,7 @@ header > nav > table tr td {
     padding: 5px 30px;
 }
 
-/* ADD TO LIBRARY, DELETE FROM LIBRARY */
-/* .add-to-library, .delete-from-library {
-    display: inline-block;
-    margin-top: 10px;
-    width: 200px;
-    line-height: 20px;
-    margin-right: 100px;
-}
-
-.add-to-library input, button, .delete-from-library input, button {
-    width: 200px;
-}
-
-.add-to-library button, .delete-from-library button {
-    margin-top: 5px;
-} */
-
+/* BOOK ADDED/DELETED */
 .book-forms {
     display: inline-grid;
 }
@@ -147,17 +131,17 @@ header > nav > table tr td {
     width: 40%;
 }
 
-/* ABOUT */
+/* HOME */
 .blur-active {
     filter: blur(1px);
     -webkit-filter: blur(1px);
 }
 
-.about-container {
+.home-container {
     height: 600px;
 }
 
-.about-message {
+.home-message {
     position: absolute;
     background-color: rgb(226, 226, 226);
     padding-top: 10px;
@@ -165,15 +149,15 @@ header > nav > table tr td {
     width: 60%;
 }
 
-.about-message p {
+.home-message p {
     padding-left: 20px;
 }
 
-.about-message a {
+.home-message a {
     color: blue;
 }
 
-.about-message a:hover {
+.home-message a:hover {
     color: darkorange;
 }
 
@@ -330,5 +314,59 @@ header > nav > table tr td {
 
     .book-added, .book-deleted {
         margin: 2.5vh 0; 
+    }
+
+    /* HOME */
+    .blur-active {
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
+    }
+
+    .home-container {
+        height: 65vh;
+    }
+
+    .home-message {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        width: 100vw;
+        font-size: 3.2vw;
+    }
+
+    .home-message a {
+        color: blue;
+    }
+
+    .home-message a:hover {
+        color: darkorange;
+    }
+
+    /* mySQL */
+    .mySQL-login-container {
+        width: 95vw;
+        height: 15vh;
+        top: 30vh;
+        font-size: 3.5vw;
+
+    }
+    .mySQL-login-container form label {
+        padding-top: 2vh;
+    }
+
+    .mySQL-login-container form input {
+        display: inline-block;
+        width: 25vw;
+        height: 4vw;
+        top: 0px;
+        font-size: 3.2vw;
+    }
+
+    .mySQL-login-container form button {
+        margin-top: 2vh;
+        padding: 1vw auto;
+        display: block;
+        height: 5vw;
+        font-size: 3.0vw;
+        font-weight: normal;
     }
 }

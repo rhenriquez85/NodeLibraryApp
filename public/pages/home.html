@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <style>
-            body {
-                background-color: rgb(223, 223, 223)
-            }
-        </style>
-        <link rel="stylesheet" href="/styles.css">
         <title>NodeLibraryApp</title>
+        <link rel="stylesheet" href="/styles.css">
         <meta charset="UTF-8">
         <meta name="description" content="Nodejs.project">
+        <script src="/helpers.js"></script>
+        <script src="/login.js" defer></script>
+        <script src="/use-indexedDB.js" defer></script>
+        <script src="/about-modal.js" defer></script>
     </head>
     <body>
         <header>
             <nav>
                 <table>
-                    <tr>
+                    <tr class="blur-inactive">
                         <td><a href="/home">Home</a></td>
                         <td><a href="/library">Library</a></td>
                         <td><a href="/about">About</a></td>
@@ -24,30 +23,34 @@
             </nav>
         </header>
         <main>
-            <p>This is the main page.</p>
-            <div>
-                <div class="book-forms">
-                    <form class="add-to-library">
-                        <label>Add a book.</label><br><br>
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="title">
-                        <label for="author">Author:</label>
-                        <input type="text" id="author" name="author">
-                        <label for="genre">Genre:</label>
-                        <input type="text" id="genre" name="genre">
-                        <button type="submit">Add</button>
-                    </form>
+            <p class="blur-inactive">This is the home page.</p>
+            <p class="login-name blur-inactive"></p>
+            <div class="home-container">
+                <div class="home-message blur-inactive">
+                    <p>The site you are visiting is a simple app built with Node.js and JavaScript. </p>
+                    <p>The node server serves HTML, CSS and JavaScript files for requests made by the browser.</p>
+                    <br>
+                    <p>You can add books to your library in the <a href="/home">Home page</a>.</p>
+                    <p>Books added are saved in local storage and will persist after the session ends.</p>
+                    <p>They are not accessible on different browsers or devices.</p>
+                    <br>
+                    <p>For persisting data, you can create a user account to store information in a database.</p>
+                    <p>Data will be retrieved from the database and saved to indexedDB.</p>
+                    <p>Once loaded, <a href="/library">your library</a> will be updated with data stored in indexedDB.</p>
+                    <br>
+                    <p>To create a user account in mySQL, <a class="mySQL-modal-link">click here</a>.</p>
+                    <br>
+                    <p>Your session is tracked in session storage.</p>
+                    <p>Once your session is over, you will be logged out and indexedDB will be cleared.</p>
                 </div>
-                <div class="book-forms">
-                    <form class="delete-from-library">
-                        <label>Delete a book.</label><br><br>
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="title">
-                        <label for="author">Author:</label>
-                        <input type="text" id="author" name="author">
-                        <label for="genre">Genre:</label>
-                        <input type="text" id="genre" name="genre">
-                        <button type="submit">Delete</button>
+                <div class="mySQL-login-container">
+                    <p>MySQL login form:</p>
+                    <form>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username">
+                        <label for="password">Password:</label>
+                        <input type="text" id="password" name="password">
+                        <button type="submit">Submit</button>
                     </form>
                 </div>
             </div>
