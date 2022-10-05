@@ -113,7 +113,7 @@ function addRandomBook() {
         { title: 'Norwegian Wood', author: 'Haruki Murakami', genre: 'Fiction' },
 
         { title: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', genre: 'Fiction' },
-        { title: "The Lord of the Rings", author: 'J.R.R Tolkein', genre: 'Fiction' },
+        { title: "The Lord of the Rings", author: 'J.R.R. Tolkein', genre: 'Fiction' },
         { title: "A Hunger Artist", author: "Franz Kafka", genre: "Fiction" },
         { title: "The Shining", author: "Stephen King", genre: "Fiction" },
         { title: "The Little Prince", author: "Antoine de Saint-Exupéry", genre: "Fiction" },
