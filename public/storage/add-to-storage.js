@@ -114,6 +114,9 @@ function addRandomBook() {
 
         { title: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', genre: 'Fiction' },
         { title: "The Lord of the Rings", author: 'J.R.R Tolkein', genre: 'Fiction' },
+        { title: "A Hunger Artist", author: "Franz Kafka", genre: "Fiction" },
+        { title: "The Shining", author: "Stephen King", genre: "Fiction" },
+        { title: "The Little Prince", author: "Antoine de Saint-Exupéry", genre: "Fiction" },
 
         { title: 'The Wasteland', author: 'T.S. Eliot', genre: 'Poetry' },
         { title: 'The Divine Comedy', author: 'Dante', genre: 'Poetry' },
@@ -129,6 +132,8 @@ function addRandomBook() {
         { title: "A People's History of the United States of America", author: 'Howard Zinn', genre: 'History' },
         { title: "A History of the World in 6 Glasses", author: 'Tom Standage', genre: 'History' },
         { title: "A Short History of Nearly Everything", author: 'Bill Bryson', genre: 'History' },
+
+        { title: "A Brief History of Everyone Who Ever Lived", author: "A. Rutherford", genre: "History"},
         
         { title: 'Ideas and Opinions', author: 'Albert Einstein', genre: 'Science' },
         { title: 'The Voyage of the Beagle', author: 'Charles Darwin', genre: 'Science' },
@@ -144,18 +149,24 @@ function addRandomBook() {
 
         { title: 'The Intelligent Investor', author: 'Benjamin Graham', genre: 'Business' },
         { title: 'The Lean Startup', author: 'Eric Ries', genre: 'Business' },
+        { title: 'The Psychology of Money', author: 'Morgan Housel', genre: 'Business' },
+        { title: 'How to Win Friends & Influence People', author: 'Dale Carnegie', genre: 'Business' },
 
         { title: 'The Wealth of Nations', author: 'Adam Smith', genre: 'Economics' },
         { title: 'The Big Short: Inside the Doomsday Machine', author: 'Michael Lewis', genre: 'Economics' },
+        { title: 'Why Nations Fail', author: 'Acemoguli, Robinson', genre: 'Economics' },
+        { title: 'Money: The True Story of a Made-Up Thing', author: 'Jacob Goldstein', genre: 'Economics' },
 
         { title: 'The Republic', author: 'Plato', genre: 'Philosophy' },
-        { title: 'Meditations on First Philosophy', author: 'Rene Descartes', genre: 'Philosophy' },
+        { title: 'Meditations on First Philosophy', author: 'René Descartes', genre: 'Philosophy' },
         { title: 'Twilight of the Idols', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
         { title: 'Dao De Jing', author: 'Laozi', genre: 'Philosophy' },
+        { title: 'The Revolt of the Masses', author: 'José Ortega y Gasset', genre: 'Philosophy' },
 
         { title: 'The Dark Knight Returns', author: 'Frank Miller', genre: 'Other' },
         { title: 'The League of Extraordinary Gentlemen', author: 'Alan Moore', genre: 'Other' },
         { title: 'Becoming', author: 'Michelle Obama', genre: 'Other' },
+        { title: 'Rachael Ray Express Lane Meals', author: 'Rachael Ray', genre: 'Other' },
     ];
 
     const username = session.getItem('active_account');
@@ -171,8 +182,6 @@ function addRandomBook() {
             objectStoreRequest.onsuccess = () => {
                 books = objectStoreRequest.result;
                 
-                console.log(books);
-
                 while (bookList.length > 0) {
                     const random =  Math.round(Math.random() *  bookList.length);
                     const index = random === bookList.length ? random - 1 : random;
@@ -219,33 +228,3 @@ function addRandomBook() {
         }
     }
 }
-
-
-
-// if (username) {
-//     if (firstIteration) {
-//         let openRequest = indexedDB.open('store', 1);
-//         let books;
-    
-//         openRequest.onsuccess = () => {
-//             const transaction = db.transaction('books', 'read');
-//             const objectStoreRequest = transaction.objectStore('books').getAll();
-
-//             objectStoreRequest.onsuccess = () => {
-//                 books = objectStoreRequest.result;
-                
-//                 console.log(books);
-
-//                 db.close();
-                
-//             };
-//         }
-
-//         firstIteration = false;
-//     }
-
-//     // console.log(1111);
-//     // console.log(books);
-//     // stopLoop = true;
-// }
-// else {

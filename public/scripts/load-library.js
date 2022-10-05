@@ -31,7 +31,6 @@ function initLibrary() {
             [++id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
             [++id, '{"title":"My Inventions","author":"Nikola Tesla","genre":"Science"}'],
             [++id, '{"title":"A Brief History of Everyone Who Ever Lived","author":"A. Rutherford","genre":"History"}'],
-            
             ['__highest', id],
         ].
         forEach(([key, value]) => {
