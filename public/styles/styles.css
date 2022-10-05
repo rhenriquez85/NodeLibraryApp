@@ -62,6 +62,7 @@ header > nav > table tr td {
     padding: 10px;
     height: 150px;
     outline: 3px solid black;
+    overflow: scroll;
 }
 
 .library-container img {
@@ -293,6 +294,7 @@ header > nav > table tr td {
         font-size: 3.5vw;
         width: fit-content;
         padding: 0vw .5vw;
+        /* margin: 0 0 0 2vh; */
         margin: 0 0 0 2vh;
         border-color: black;
         border-radius: 1vw;
@@ -405,5 +407,7 @@ header > nav > table tr td {
         height: 5vw;
         font-size: 3.0vw;
         font-weight: normal;
+        border-color: black;
+        border-radius: 1vw;
     }
 }

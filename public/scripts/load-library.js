@@ -3,7 +3,7 @@ const session = window.sessionStorage;
 const local = window.localStorage;
 
 initLibrary();
-showResetButton();
+showLibraryButtons();
 
 if (session.getItem('database') === 'mySQL') {
     updateIndexedDB((db) => {
@@ -29,8 +29,9 @@ function initLibrary() {
         [
             ['__visited', 'true'],
             [++id, '{"title":"A Hunger Artist","author":"Franz Kafka","genre":"Fiction"}'],
-            [++id, '{"title":"As I Lay Dying","author":"William Faulkner","genre":"Fiction"}'],
-            [++id, '{"title":"White Buildings","author":"Hart Crane","genre":"Poetry"}'],
+            [++id, '{"title":"My Inventions","author":"Nikola Tesla","genre":"Science"}'],
+            [++id, '{"title":"A Brief History of Everyone Who Ever Lived","author":"A. Rutherford","genre":"History"}'],
+            
             ['__highest', id],
         ].
         forEach(([key, value]) => {
@@ -39,11 +40,43 @@ function initLibrary() {
     }
 }
 
-function showResetButton() {
+function showLibraryButtons() {
+    const activeSession = session.getItem('active_account');
+
     const resetBtn = document.querySelector('.reset-library');
-    resetBtn.style.display = session.getItem('active_account') ?
-        'none' :
-        'initial';
+    resetBtn.style.display = activeSession ? 'none' : 'initial';
+
+    let mediaQueries = [];
+    ['(pointer:none)', '(pointer:coarse)', '(max-width: 768px)'].forEach((el) => {
+        mediaQueries.push(window.matchMedia(el));
+    });
+
+    for (const query of mediaQueries) {
+        if (query.matches) {
+            if (activeSession) {
+                const css = document.styleSheets[0].cssRules;
+                const mediaRules = css[css.length - 1].cssRules;
+            
+                resetBtn.style.display = 'initial';
+                for (const rule of mediaRules) {
+                    if (rule.selectorText === '.reset-library') {
+                        rule.style.visibility = 'hidden';
+                        rule.style.order = 2;
+                        break;
+                    }
+                }
+            
+                for (const rule of mediaRules) {
+                    if (rule.selectorText === '.add-random-book') {
+                        rule.style.order = 3;
+                        rule.style.marginLeft = '0';
+                        rule.style.marginRight = '2vw';
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
 
 function loadLibrary(books) {

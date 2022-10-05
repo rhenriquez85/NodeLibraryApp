@@ -10,22 +10,29 @@ addForm.addEventListener('submit', (event) => {
 });
 
 // HELPERS
-function addToLibrary() {
-    const bookDetails = ['title', 'author', 'genre'];
-    for (const detail of bookDetails) {
-        if (addForm.elements[detail].value === '') {
-            const article = detail === 'author' ? 'an' : 'a';
-            window.alert(`Please enter ${article} ${detail}.`);
-            return;
-        }
-    }
+function addToLibrary(book) {
+    let data = {};
 
-    const data = {};
-    bookDetails.forEach((name) => {
-        const property = addForm.elements[name];
-        data[name] = property.value;
-        property.value = '';
-    });
+    if (book) {
+        data = book;
+    }
+    else {
+        const bookDetails = ['title', 'author', 'genre'];
+        for (const detail of bookDetails) {
+            if (addForm.elements[detail].value === '') {
+                const article = detail === 'author' ? 'an' : 'a';
+                window.alert(`Please enter ${article} ${detail}.`);
+                return;
+            }
+        }
+
+        // const data = {};
+        bookDetails.forEach((name) => {
+            const property = addForm.elements[name];
+            data[name] = property.value;
+            property.value = '';
+        });
+    }
 
     const title = data['title'];
     const session = window.sessionStorage;
@@ -75,7 +82,7 @@ function addToLibrary() {
 
     setTimeout(() => {
         window.location = window.location;
-    }, 1100);
+    }, 1300);
 }
 
 function displayAddMessage(name) {
@@ -89,4 +96,100 @@ function displayAddMessage(name) {
     addForm.nextSibling?.remove();
     deleteForm.nextSibling?.remove();
     addForm.insertAdjacentHTML('afterend', html);
+}
+
+function addRandomBook() {
+    const bookList = [
+        { title: 'A Portrait of the Artist as a Young Man', author: 'James Joyce', genre: 'Fiction' },
+        { title: 'As I Lay Dying', author: 'William Faulkner', genre: 'Fiction' },
+        { title: 'A Farewell to Arms', author: 'Ernest Hemingway', genre: 'Fiction' },
+        { title: 'Notes from Underground', author: 'Fyodor Dostoevksy', genre: 'Fiction' },
+        { title: '1984', author: 'George Orwell', genre: 'Fiction' },
+
+        { title: 'Foundation', author: 'Isaac Asimov', genre: 'Fiction' },
+        { title: 'A Catcher in the Rye', author: 'J.D. Salinger', genre: 'Fiction' },
+        { title: 'The Time Machine', author: 'H.G. Wells', genre: 'Fiction' },
+        { title: 'War and Peace', author: 'Leo Tolstoy', genre: 'Fiction' },
+        { title: 'Norwegian Wood', author: 'Haruki Murakami', genre: 'Fiction' },
+
+        { title: 'The Wasteland', author: 'T.S. Eliot', genre: 'Poetry' },
+        { title: 'The Divine Comedy', author: 'Dante', genre: 'Poetry' },
+        { title: 'The Bridge', author: 'Hart Crane', genre: 'Poetry' },
+        { title: 'Aenead', author: 'Virgil', genre: 'Poetry' },
+        { title: 'Paradise Lost', author: 'John Milton', genre: 'Poetry' },
+
+        { title: 'Tamerlane and Other Poems', author: 'Edgar Allan Poe', genre: 'Poetry' },
+        { title: 'The Odyssey', author: 'Homer', genre: 'Poetry' },
+
+        { title: 'The History of the Decline and Fall of the Roman Empire', author: 'Edward Gibbon', genre: 'History' },
+        { title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', genre: 'History' },
+        { title: "A People's History of the United States of America", author: 'Howard Zinn', genre: 'History' },
+        { title: "A History of the World in 6 Glasses", author: 'Tom Standage', genre: 'History' },
+        { title: "A Short History of Nearly Everything", author: 'Bill Bryson', genre: 'History' },
+        
+        { title: 'Ideas and Opinions', author: 'Albert Einstein', genre: 'Science' },
+        { title: 'The Voyage of the Beagle', author: 'Charles Darwin', genre: 'Science' },
+        { title: 'A Brief History of Time', author: 'Stephen Hawking', genre: 'Science' },
+        { title: 'Civilization and its Discontents', author: 'Sigmund Freud', genre: 'Science' },
+        { title: 'My Inventions', author: 'Nikola Tesla', genre: 'Science' },
+
+        { title: 'The Singularity is Near', author: 'Ray Kurzweil', genre: 'Technology' },
+        { title: 'Steve Jobs', author: 'Walter Isaacson', genre: 'Technology' },
+        { title: 'The Metaverse: And How It Will Revolutionize Everything', author: 'Matthew Bell', genre: 'Technology' },
+        { title: 'Everyday Choas', author: 'David Weinberger', genre: 'Technology' },
+        { title: 'The Age of A.I.', author: 'Henry Kissinger, Eric Schmidt, Daniel Huttenlocher', genre: 'Technology' },
+
+        { title: 'The Intelligent Investor', author: 'Benjamin Graham', genre: 'Business' },
+        { title: 'The Lean Startup', author: 'Eric Ries', genre: 'Business' },
+
+        { title: 'The Wealth of Nations', author: 'Adam Smith', genre: 'Economics' },
+        { title: 'The Big Short: Inside the Doomsday Machine', author: 'Michael Lewis', genre: 'Economics' },
+
+        { title: 'The Republic', author: 'Plato', genre: 'Philosophy' },
+        { title: 'Meditations on First Philosophy', author: 'Rene Descartes', genre: 'Philosophy' },
+        { title: 'Twilight of the Idols', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
+        { title: 'Dao De Jing', author: 'Laozi', genre: 'Philosophy' },
+
+        { title: 'The Dark Knight Returns', author: 'Frank Miller', genre: 'Other' },
+        { title: 'The League of Extraordinary Gentlemen', author: 'Alan Moore', genre: 'Other' },
+        { title: 'Becoming', author: 'Michelle Obama', genre: 'Other' },
+    ];
+
+    const username = session.getItem('active_account');
+    while (bookList.length > 0) {
+        const random =  Math.round(Math.random() *  bookList.length);
+        const index = random === bookList.length ? random - 1 : random;
+        let stopLoop; 
+
+        if (username) {
+            // let openRequest = indexedDB.open('store', 1);
+
+            // openRequest.onsuccess = () => {
+            //     const transaction = db.transaction('books', 'read');
+            //     const objectStoreRequest = transaction.objectStore('books').getAll();
+
+            //     objectStoreRequest.onsuccess = () => {
+            //         const books = objectStoreRequest.result;
+            //         loadLibrary(books);
+            //         db.close();
+            //     };
+            // }
+        }
+        else {
+            const books = Object.values(convertLocalStorageToObj());
+
+            stopLoop = true;
+            for (let i = 0; i < books.length; i++) {
+                if (bookList[index].title === books[i].title) {
+                    bookList.splice(index, 1);
+                    stopLoop = false;
+                    break;
+                }
+            }
+
+            if (!stopLoop) continue;
+            addToLibrary(bookList[index]);
+            break;
+        }
+    }
 }
