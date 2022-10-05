@@ -112,6 +112,9 @@ function addRandomBook() {
         { title: 'War and Peace', author: 'Leo Tolstoy', genre: 'Fiction' },
         { title: 'Norwegian Wood', author: 'Haruki Murakami', genre: 'Fiction' },
 
+        { title: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', genre: 'Fiction' },
+        { title: "The Lord of the Rings", author: 'J.R.R Tolkein', genre: 'Fiction' },
+
         { title: 'The Wasteland', author: 'T.S. Eliot', genre: 'Poetry' },
         { title: 'The Divine Comedy', author: 'Dante', genre: 'Poetry' },
         { title: 'The Bridge', author: 'Hart Crane', genre: 'Poetry' },
@@ -130,7 +133,7 @@ function addRandomBook() {
         { title: 'Ideas and Opinions', author: 'Albert Einstein', genre: 'Science' },
         { title: 'The Voyage of the Beagle', author: 'Charles Darwin', genre: 'Science' },
         { title: 'A Brief History of Time', author: 'Stephen Hawking', genre: 'Science' },
-        { title: 'Civilization and its Discontents', author: 'Sigmund Freud', genre: 'Science' },
+        { title: 'Civilization and Its Discontents', author: 'Sigmund Freud', genre: 'Science' },
         { title: 'My Inventions', author: 'Nikola Tesla', genre: 'Science' },
 
         { title: 'The Singularity is Near', author: 'Ray Kurzweil', genre: 'Technology' },
@@ -156,26 +159,49 @@ function addRandomBook() {
     ];
 
     const username = session.getItem('active_account');
-    while (bookList.length > 0) {
-        const random =  Math.round(Math.random() *  bookList.length);
-        const index = random === bookList.length ? random - 1 : random;
-        let stopLoop; 
 
-        if (username) {
-            // let openRequest = indexedDB.open('store', 1);
+    if (username) {
+        let openRequest = indexedDB.open('store', 1);
 
-            // openRequest.onsuccess = () => {
-            //     const transaction = db.transaction('books', 'read');
-            //     const objectStoreRequest = transaction.objectStore('books').getAll();
+        openRequest.onsuccess = () => {
+            const db = openRequest.result;
+            const transaction = db.transaction('books', 'readwrite');
+            const objectStoreRequest = transaction.objectStore('books').getAll();
 
-            //     objectStoreRequest.onsuccess = () => {
-            //         const books = objectStoreRequest.result;
-            //         loadLibrary(books);
-            //         db.close();
-            //     };
-            // }
+            objectStoreRequest.onsuccess = () => {
+                books = objectStoreRequest.result;
+                
+                console.log(books);
+
+                while (bookList.length > 0) {
+                    const random =  Math.round(Math.random() *  bookList.length);
+                    const index = random === bookList.length ? random - 1 : random;
+                    let stopLoop; 
+            
+                    stopLoop = true;
+                    for (let i = 0; i < books.length; i++) {
+                        if (bookList[index].title === books[i].title) {
+                            bookList.splice(index, 1);
+                            stopLoop = false;
+                            break;
+                        }
+                    }
+        
+                    if (!stopLoop) continue;
+                    addToLibrary(bookList[index]);
+                    db.close();
+                    break;
+                }
+                db.close();
+            };
         }
-        else {
+    }
+    else {
+        while (bookList.length > 0) {
+            const random =  Math.round(Math.random() *  bookList.length);
+            const index = random === bookList.length ? random - 1 : random;
+            let stopLoop; 
+    
             const books = Object.values(convertLocalStorageToObj());
 
             stopLoop = true;
@@ -193,3 +219,33 @@ function addRandomBook() {
         }
     }
 }
+
+
+
+// if (username) {
+//     if (firstIteration) {
+//         let openRequest = indexedDB.open('store', 1);
+//         let books;
+    
+//         openRequest.onsuccess = () => {
+//             const transaction = db.transaction('books', 'read');
+//             const objectStoreRequest = transaction.objectStore('books').getAll();
+
+//             objectStoreRequest.onsuccess = () => {
+//                 books = objectStoreRequest.result;
+                
+//                 console.log(books);
+
+//                 db.close();
+                
+//             };
+//         }
+
+//         firstIteration = false;
+//     }
+
+//     // console.log(1111);
+//     // console.log(books);
+//     // stopLoop = true;
+// }
+// else {
